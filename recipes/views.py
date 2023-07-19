@@ -1,14 +1,13 @@
 from django.http import HttpResponse
 
-# from django.shortcuts import render
+from django.shortcuts import render
 
 
-# Create your views here.
-# HTTP REQUEST <- HTTP RESPONSE
-# HTTP REQUEST
 def home(request):
-    return HttpResponse("HOME")
-    # return HTTP Response
+    return render(request, 'recipes/home.html', context={
+        'name':'Gabriel Nascimento',
+        'idade':'23',
+    })
 
 
 def sobre(request):
