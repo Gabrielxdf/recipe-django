@@ -1,0 +1,30 @@
+django-admin e manage.py são basicamente a mesma coisa, com a diferença de que o manage.py já carrega o arquivo contendo as configurações do django.
+
+Na prática, só se usa django-admin pra dar um startproject, depois todos os outros comandos se usa o manage.py
+
+o protocolo http funciona com o cliente fazendo uma request e o servidor retornando uma response
+HTTP REQUEST <- HTTP RESPONSE
+
+no arquivo urls.py defino as rotas do django. essas rotas obtém a request do cliente, passa esse request para uma função chamada view e tratam esse http request, retornando um http response
+
+a função path do django precisa de dois argumentos, uma string para a rota e uma função para a view. A função de view precisa cumprir alguns requisitos, receber como parametro o um http request e retornar um http response
+
+depois de criar o projeto, se cria o app django: "O Django permite que nosso site seja dividido em apps. Com isso, eu poderia criar um app para cada parte específica dele.    Exemplos: home, sobre, contato, e assim por diante. Geralmente, apps precisam conter tudo o que for relacionado, visto que você pode mover esses apps para outros projetos para reutilizar o código. Então, se algo for interligado com outra parte do sistema, convém manter essas partes dentro do mesmo app, caso contrário, seu app não funcionaria corretamente em outro projeto."
+
+projetos > urls django tem uma função chamada include para incluir as urls de outro arquivo. tem como parâmetro o nome do app e o nome do arquivo com as urls.
+
+# HTTP REQUEST <- HTTP RESPONSE
+# HTTP REQUEST
+def home(request):
+    return HttpResponse("HOME")
+    # return HTTP Response
+
+def home(request):
+    return render(request, 'home.html')
+a função render recebe um request e o caminho de um template para renderizar, ela irá buscar dentro da pasta templates. Também é preciso incluir o nome do app no settings.py, para que o django saiba onde estará a pasta templates.
+posso passar variáveis para o render renderizar no template atraves do parametro context.
+Também se pode fazer diversas coisas nos templates, como IF e FOR
+
+base_static e base_templates são arquivos globais, não estão atrelados a nenhum app. É sempre bom usar o namespacing para não gerar conflito quando executar o comando collectstatic
+
+quanto aos {% block %}, sempre que uso essa "tag" estou definindo um block, mas se eu estiver estendendo uma página e defino um bloco com o mesmo nome de um bloco definido na página pai, quer dizer que estou usando esse bloco da página pai para inserir conteúdo nele. Ou seja, nas páginas filho se eu digitar um {% block %} que não esteja na página pai, seja por erro de digitação ou outro motivo, eu estou definindo um bloco novo.
