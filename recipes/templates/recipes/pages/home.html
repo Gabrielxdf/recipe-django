@@ -1,18 +1,13 @@
 {% extends 'global/base.html' %}
 
+{% block title %}
+  Home |
+{% endblock %}
+
 {% block content %}
-    <div class="main-content main-content-list container">
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-        {% include 'recipes/partials/recipe.html' %}
-    </div>
+  <div class="main-content main-content-list container">
+    {% for recipe in recipes %}
+      {% include 'recipes/partials/recipe.html' %} <!-- the page recipe.html has acess to the variable recipe which was passed to home.html -->
+    {% endfor %}
+  </div>
 {% endblock %}
