@@ -28,3 +28,6 @@ Também se pode fazer diversas coisas nos templates, como IF e FOR
 base_static e base_templates são arquivos globais, não estão atrelados a nenhum app. É sempre bom usar o namespacing para não gerar conflito quando executar o comando collectstatic
 
 quanto aos {% block %}, sempre que uso essa "tag" estou definindo um block, mas se eu estiver estendendo uma página e defino um bloco com o mesmo nome de um bloco definido na página pai, quer dizer que estou usando esse bloco da página pai para inserir conteúdo nele. Ou seja, nas páginas filho se eu digitar um {% block %} que não esteja na página pai, seja por erro de digitação ou outro motivo, eu estou definindo um bloco novo.
+
+Model é uma classe que representa minha tabela no banco de dados, os atributos dessa classe são as colunas.
+migrate é o ato de atualizar a base de dados para sincronizar o meu código com a base de dados
