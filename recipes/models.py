@@ -6,7 +6,7 @@ class Category(models.Model):
     name = models.CharField(max_length=65)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.id})'
 
 
 class Recipe(models.Model):
@@ -31,4 +31,4 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return self.title
+        return f'{self.title} ({self.id})'
