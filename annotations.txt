@@ -38,3 +38,5 @@ O .objects é o manager do django. No Django, usamos o "manager" do model para e
 Podemos filtrar dados usando uma Foreign Key (chave estrangeira) de determinado model. Para isso, usamos o nome do campo que representa a foreign key, dois underlines e o nome do campo no model estrangeiro (de onde vem a foreign key).
 recipes = Recipe.objects.filter(category__name="Almoço") retornará todas as receitas cuja categoria tem o nome "almoço". Aula 58
 category__name acessa a tabela categoria diretamente pela foreign key do recipe 'category' e tá pedindo pra filtrar os objetos pela nome da categoria.
+
+O blank=True é referente ao formulário, ou seja, não valida o formulário se o campo estiver em branco.
