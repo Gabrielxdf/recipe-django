@@ -40,3 +40,6 @@ recipes = Recipe.objects.filter(category__name="Almoço") retornará todas as re
 category__name acessa a tabela categoria diretamente pela foreign key do recipe 'category' e tá pedindo pra filtrar os objetos pela nome da categoria.
 
 O blank=True é referente ao formulário, ou seja, não valida o formulário se o campo estiver em branco.
+
+A utilização do "app_name" em urls.py é útil quando você tem múltiplas aplicações Django em seu projeto. Ele define um namespace para as URLs da aplicação, evitando conflitos de nomes com outras aplicações.
+Quando você define um "app_name" em urls.py, você precisa usar essa sintaxe no template HTML para referenciar corretamente a URL da aplicação. O formato é '{namespace:nome_url}', onde 'namespace' é o valor definido em "app_name" e 'nome_url' é o nome atribuído à URL específica.
