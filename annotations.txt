@@ -33,7 +33,7 @@ Model é uma classe que representa minha tabela no banco de dados, os atributos 
 migrate é o ato de atualizar a base de dados para sincronizar o meu código com a base de dados. Antes de executar o comando migrate preciso criar os arquivos de migration através do comando makemigrations.
 
 QuerySet é um iterável, é uma lista de objetos dos meus Database/Modelos Django.
-O .objects é o manager do django.
+O .objects é o manager do django. No Django, usamos o "manager" do model para executar queries na base de dados.
 
 Podemos filtrar dados usando uma Foreign Key (chave estrangeira) de determinado model. Para isso, usamos o nome do campo que representa a foreign key, dois underlines e o nome do campo no model estrangeiro (de onde vem a foreign key).
 recipes = Recipe.objects.filter(category__name="Almoço") retornará todas as receitas cuja categoria tem o nome "almoço". Aula 58
