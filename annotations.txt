@@ -43,3 +43,8 @@ O blank=True é referente ao formulário, ou seja, não valida o formulário se 
 
 A utilização do "app_name" em urls.py é útil quando você tem múltiplas aplicações Django em seu projeto. Ele define um namespace para as URLs da aplicação, evitando conflitos de nomes com outras aplicações.
 Quando você define um "app_name" em urls.py, você precisa usar essa sintaxe no template HTML para referenciar corretamente a URL da aplicação. O formato é '{namespace:nome_url}', onde 'namespace' é o valor definido em "app_name" e 'nome_url' é o nome atribuído à URL específica.
+
+Sobre o pytest
+DJANGO_SETTINGS_MODULE = project.settings # telling to pytest where is my django settings
+python_files = test.py tests.py test_*.py tests_*.py *_test.py *_tests.py # telling to pytest where to find tests by method name
+addopts = # this allow to pass settings to pytest
