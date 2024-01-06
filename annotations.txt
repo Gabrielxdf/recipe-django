@@ -48,3 +48,5 @@ Sobre o pytest
 DJANGO_SETTINGS_MODULE = project.settings # telling to pytest where is my django settings
 python_files = test.py tests.py test_*.py tests_*.py *_test.py *_tests.py # telling to pytest where to find tests by method name
 addopts = # this allow to pass settings to pytest
+
+O nome do método de teste tem que ser super descritivo, mesmo que seja grande, para que, quando houver erro, eu saiba exatamente onde está o erro, o que errou e porque que errou.
