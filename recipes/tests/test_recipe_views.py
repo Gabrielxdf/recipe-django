@@ -50,7 +50,19 @@ class RecipeViewsTest(TestCase):
             preparation_steps_is_html=False,
             is_published=True,
         )
-        assert 1 == 1
+        response = self.client.get(reverse('recipes:home'))
+
+        # getting the context passed to the view
+        context_recipes = response.context['recipes']
+        # getting the template's content
+        content = response.content.decode('utf-8')
+
+        # context test example, check the number of recipes created
+        self.assertEqual(len(context_recipes), 1)
+        # content test example, checks if the recipe title is in content
+        self.assertIn('Recipe Title', content)
+        self.assertIn('10 Minutos', content)
+        self.assertIn('5 Porções', content)
 
     def test_recipe_category_view_is_correct(self):
         view = resolve(reverse('recipes:category', kwargs={'category_id': 1}))
