@@ -50,3 +50,5 @@ python_files = test.py tests.py test_*.py tests_*.py *_test.py *_tests.py # tell
 addopts = # this allow to pass settings to pytest
 
 O nome do método de teste tem que ser super descritivo, mesmo que seja grande, para que, quando houver erro, eu saiba exatamente onde está o erro, o que errou e porque que errou.
+
+Fixture é criar dados para o teste, porque, para cada teste, uma nova base de dados é criada, essa base de dados vem vazia. Então se cria fixture para inserir dados nessa base de dados de teste, no fim do teste a base é destruída.
