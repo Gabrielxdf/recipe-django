@@ -28,8 +28,16 @@ class RecipeViewsTest(RecipeTestBase):
         )
 
     def test_recipe_home_template_loads_recipes(self):
-        response = self.client.get(reverse('recipes:home'))
+        # Need a recipe for this test
+        self.make_recipe(preparation_time=5,
+                         author_data={
+                             'first_name': 'Gabriel',
+                         },
+                         category_data={
+                             'name': 'Café da manhã',
+                         })
 
+        response = self.client.get(reverse('recipes:home'))
         # getting the context passed to the view
         context_recipes = response.context['recipes']
         # getting the template's content
@@ -39,8 +47,9 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(len(context_recipes), 1)
         # content test example, checks if the recipe title is in content
         self.assertIn('Recipe Title', content)
-        self.assertIn('10 Minutos', content)
-        self.assertIn('5 Porções', content)
+        self.assertIn('5 Minutos', content)
+        self.assertIn('Gabriel', content)
+        self.assertIn('Café da manhã', content)
 
     def test_recipe_category_view_is_correct(self):
         view = resolve(reverse('recipes:category', kwargs={'category_id': 1}))
