@@ -1,3 +1,5 @@
+from unittest import skip
+
 from django.urls import resolve, reverse
 
 from recipes import views
@@ -7,7 +9,6 @@ from .test_recipe_base import RecipeTestBase
 
 class RecipeViewsTest(RecipeTestBase):
     def test_recipe_home_view_is_correct(self):
-        # Testing if the url is calling the correct view
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
 
@@ -16,16 +17,17 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_home_view_loads_correct_template(self):
-        # Testing if the view is rendering the correct template
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
+    @skip('WIP - Work In Progress')
     def test_recipe_home_template_shows_no_recipes_found_if_no_recipes(self):
         response = self.client.get(reverse('recipes:home'))
         self.assertIn(
             '<h1>No recipes found here 😢</h1>',
             response.content.decode('utf-8')
         )
+        self.fail('Come here again and finish the code.')
 
     def test_recipe_home_template_loads_recipes(self):
         # Need a recipe for this test
