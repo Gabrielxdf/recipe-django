@@ -3,9 +3,8 @@ from django.urls import reverse
 
 
 class RecipeURLsTest(TestCase):
-    # Testing if urls is correct
-
     def test_recipe_home_url_is_correct(self):
+        # Testing if urls is correct
         url = reverse('recipes:home')
         self.assertEqual(url, '/')
 

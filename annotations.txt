@@ -53,6 +53,12 @@ O nome do método de teste tem que ser super descritivo, mesmo que seja grande, 
 
 Fixture é criar dados para o teste, porque, para cada teste, uma nova base de dados é criada, essa base de dados vem vazia. Então se cria fixture para inserir dados nessa base de dados de teste, no fim do teste a base é destruída. Mas em um termo mais geral, fixture é qualquer trecho de código que serve para dar suporte aos testes, como o carregamento de um arquivo, injetar dados na base de dados, e etc.
 
+
+test_recipe_home_url_is_correct(self): Testa se a URL está correta.
+def test_recipe_home_view_is_correct(self): Testa se a URL chama a view correta.
+test_recipe_home_view_loads_correct_template(self): Testa se a view está renderizando o template correto.
+
+
 sobre o test_recipe_home_template_loads_recipes primeiramente criamos os dados, executei um get na url, essa url retornou uma response, essa response tem um conteudo que foi convertido para string, depois checo se nesse conteudo está o meu 'Recipe Title'.
 
 Todos esses testes são unitários, testes de desenvolvedor, de dentro para fora. Também precisamos fazer os testes funcionais, que são os testes de usuário, de fora para dentro, simulando a interação de um usuário com nosso sistema. É importante fazer os dois tipos de testes para fechar todas as lacunas.

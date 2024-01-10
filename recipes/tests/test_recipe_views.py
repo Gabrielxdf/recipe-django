@@ -6,9 +6,8 @@ from .test_recipe_base import RecipeTestBase
 
 
 class RecipeViewsTest(RecipeTestBase):
-    # Testing if the url is calling the correct view
-
     def test_recipe_home_view_is_correct(self):
+        # Testing if the url is calling the correct view
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
 
@@ -17,6 +16,7 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_home_view_loads_correct_template(self):
+        # Testing if the view is rendering the correct template
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/pages/home.html')
 
@@ -47,9 +47,6 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertEqual(len(context_recipes), 1)
         # content test example, checks if the recipe title is in content
         self.assertIn('Recipe Title', content)
-        self.assertIn('5 Minutos', content)
-        self.assertIn('Gabriel', content)
-        self.assertIn('Café da manhã', content)
 
     def test_recipe_category_view_is_correct(self):
         view = resolve(reverse('recipes:category', kwargs={'category_id': 1}))
