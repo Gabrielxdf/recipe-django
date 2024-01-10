@@ -62,3 +62,5 @@ test_recipe_home_view_loads_correct_template(self): Testa se a view está render
 sobre o test_recipe_home_template_loads_recipes primeiramente criamos os dados, executei um get na url, essa url retornou uma response, essa response tem um conteudo que foi convertido para string, depois checo se nesse conteudo está o meu 'Recipe Title'.
 
 Todos esses testes são unitários, testes de desenvolvedor, de dentro para fora. Também precisamos fazer os testes funcionais, que são os testes de usuário, de fora para dentro, simulando a interação de um usuário com nosso sistema. É importante fazer os dois tipos de testes para fechar todas as lacunas.
+
+Não preciso testar coisas do django, da funcionalidade dele, porque os devs do django já fizeram isso. Preciso testar coisas que envolvem a lógica da minha aplicação. Devo testar coisas que mudam minha aplicação, como o tamanho de string que um campo suporta, se for maior, tem que mostrar um erro pro usuario, ou como o is_published = models.BooleanField(default=False) que muda drasticamente a aplicação.
