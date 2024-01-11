@@ -9,6 +9,23 @@ class RecipeModelTest(RecipeTestBase):
         self.recipe = self.make_recipe()
         return super().setUp()
 
+    def make_recipe_no_defaults(self):
+        recipe = Recipe(
+            category=self.make_category(name='Test Default Category'),
+            author=self.make_author(username='newuser'),
+            title='Recipe Title',
+            description='Recipe Description',
+            slug='recipe-slug',
+            preparation_time=10,
+            preparation_time_unit='Minutos',
+            servings=5,
+            servings_unit='Porções',
+            preparation_steps='Recipe Preparation Steps',
+        )
+        recipe.full_clean()
+        recipe.save()
+        return recipe
+
     @parameterized.expand([
         ('title', 65),
         ('description', 165),
@@ -19,3 +36,17 @@ class RecipeModelTest(RecipeTestBase):
         setattr(self.recipe, field, 'A' * (max_length + 1))
         with self.assertRaises(ValidationError):
             self.recipe.full_clean()  # Here's where the validation occurs
+
+    def test_recipe_preparation_steps_is_html_is_false_by_default(self):
+        recipe = self.make_recipe_no_defaults()
+        self.assertFalse(
+            recipe.preparation_steps_is_html,
+            msg='Recipe preparation_steps_is_html is not False',
+        )
+
+    def test_recipe_is_published_is_false_by_default(self):
+        recipe = self.make_recipe_no_defaults()
+        self.assertFalse(
+            recipe.is_published,
+            msg='Recipe is_published is not False',
+        )
