@@ -70,3 +70,13 @@ self.recipe.full_clean() nós somos os responsaveis de fazer com que o django ex
 with self.assertRaises(ValidationError):
     self.recipe.full_clean()
 Dentro do contexto (context manager) do assertRaises com with, eu escrevo o código que espero que levante o erro que está sendo passado como parâmetro.
+
+from recipes.models import Recipe
+
+for i in range(5):
+    for j in range(10):
+        r = Recipe.objects.get(id=i)
+        r.id = None
+        r.title = f'{r.title} {j}'
+        r.save()
+duplicar as receitas mudando apenas os titulos
