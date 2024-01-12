@@ -22,3 +22,9 @@ class RecipeURLsTest(TestCase):
         # sent the args in order in a tuple
         url = reverse('recipes:recipe', args=(1,))
         self.assertEqual(url, '/recipes/1/')
+
+    def test_recipe_search_url_is_correct(self):
+        """Testing if the URL is correct"""
+
+        url = reverse('recipes:search')
+        self.assertEqual(url, '/recipes/search/')

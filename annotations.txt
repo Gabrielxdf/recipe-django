@@ -81,3 +81,10 @@ duplicar as receitas mudando apenas os titulos
 from django.utils.text import slugify
 for recipe in recipes: recipe.slug = slugify(recipe.title); recipe.save();
 slugifying os titulos
+
+No TDD tenho que pensar no que quero que aconteça, escrevo um teste pra isso acontecer, e depois escreve o código, e depois, se precisar, refatora o código até o teste passar.
+
+Ciclo do TDD > RED - GREEN - REFACTOR
+RED - Escrever um teste que falhe.
+GREEN - Fazer o teste passar com o menor esforço possível, no caso da url search, seria apenas criar a nova url, sem criar as views ainda. Criar a view será outro teste, resolvendo também, com o menor esforço possível.
+REFACTOR - Refatorar o código eliminando redundâncias. (Entender melhor)
