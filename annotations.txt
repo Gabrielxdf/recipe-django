@@ -75,8 +75,9 @@ from recipes.models import Recipe
 
 for i in range(5):
     for j in range(10):
-        r = Recipe.objects.get(id=i)
-        r.id = None
-        r.title = f'{r.title} {j}'
-        r.save()
+        r = Recipe.objects.get(id=i); r.id = None; r.title = f'{r.title} {j}'; r.save()
 duplicar as receitas mudando apenas os titulos
+
+from django.utils.text import slugify
+for recipe in recipes: recipe.slug = slugify(recipe.title); recipe.save();
+slugifying os titulos
