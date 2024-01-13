@@ -157,3 +157,7 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertTemplateUsed(response, 'recipes/pages/search.html')
         """ In this point, for the search feature, we already have a url that
         calls a view, and that view renders a correct template. """
+
+    def test_recipe_search_raises_404_if_no_search_term(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertEqual(response.status_code, 404)
