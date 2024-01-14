@@ -98,3 +98,5 @@ Diferente do MVC, o Django usa o padrão MTV (Model, Template, View).
     A view é uma função ou classe (no caso de Class Based Views), que cria uma lógica para descobrir quais dados (pode ser do model) ela vai utilizar, e escolhe o que vai renderizar, ou seja, qual template vai utilizar. A view no django seria quase o controller do MVC. Em resumo, a função da view é fazer a lógica pra saber o que vai ser mostrado para o usuário. A view é o intermediário entre o model e o template, afinal ela pode escolher qual model utilizar e qual template utilizar para mostrar na tela.
 
     O template é a parte que o usuário vê e interage, ou seja, é o HTML. Embora o template possa ter lógica. não é recomendável, quanto menos lógica no template melhor é e mais fácil de testar é.
+
+    title__icontains=search_term icontains é simplesmente o contains mas case insensitive, não diferencia letras maiusculas e minusculas.
