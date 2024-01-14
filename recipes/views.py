@@ -43,7 +43,13 @@ def search(request):
     if not search_term:
         raise Http404()
 
+    recipes = Recipe.objects.filter(
+        is_published=True,
+        title__contains=search_term,
+    ).order_by('-id')
+
     return render(request, 'recipes/pages/search.html', context={
         'page_title': f'Search for "{search_term}" |',
         'search_term': search_term,
+        'recipes': recipes
     })
