@@ -87,7 +87,7 @@ No TDD tenho que pensar no que quero que aconteça, escrevo um teste pra isso ac
 Ciclo do TDD > RED - GREEN - REFACTOR
 RED - Escrever um teste que falhe.
 GREEN - Fazer o teste passar com o menor esforço possível, no caso da url search, seria apenas criar a nova url, sem criar as views ainda. Criar a view será outro teste, resolvendo também, com o menor esforço possível. Esse teste de URL não precisou de REFACTOR, mas se olhar por outro lado, o teste de criar e corrigir a view pode ter sido um REFACTOR desse teste da URL.
-REFACTOR - Refatorar o código eliminando novos erros que possam surgir. O TDD guia a gente a cada erro que surge quando vamos corrigindo de um por um com o menor esforço possível.
+REFACTOR - Refatorar o código eliminando novos erros que possam surgir. O TDD guia a gente a cada erro que surge quando vamos corrigindo de um por um com o menor esforço possível. REFACTOR também existe para corrigirmos o código caso tenhamos feito algo apenas para os testes passarem rapidamente. Algumas vezes isso pode envolver criar outros testes.
 
 Então o TDD busca ir do RED para o GREEN o mais rápido possível e se for necessário, REFACTOR.
 
