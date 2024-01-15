@@ -100,3 +100,9 @@ Diferente do MVC, o Django usa o padrão MTV (Model, Template, View).
     O template é a parte que o usuário vê e interage, ou seja, é o HTML. Embora o template possa ter lógica. não é recomendável, quanto menos lógica no template melhor é e mais fácil de testar é.
 
     title__icontains=search_term icontains é simplesmente o contains mas case insensitive, não diferencia letras maiusculas e minusculas.
+
+
+test_recipe_search_can_find_recipe_by_title:
+    self.assertIn(recipe1, response1.context['recipes'])
+
+    só estou testando se a recipe foi enviada ao contexto, não estou testando o template (se a recipe foi de fato renderizada no template, nesse caso eu veria se o título da recipe 1 está no content da response, por exemplo)
