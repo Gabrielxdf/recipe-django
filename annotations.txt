@@ -72,11 +72,12 @@ with self.assertRaises(ValidationError):
 Dentro do contexto (context manager) do assertRaises com with, eu escrevo o código que espero que levante o erro que está sendo passado como parâmetro.
 
 from recipes.models import Recipe
+from django.utils.text import slugify
 
 for i in range(5):
-    for j in range(10):
-        r = Recipe.objects.get(id=i); r.id = None; r.title = f'{r.title} {j}'; r.save()
-duplicar as receitas mudando apenas os titulos
+    for j in range(10, 101):
+        r = Recipe.objects.get(id=i+1); r.id = None; r.title = f'{r.title} {j}'; r.slug = slugify(f'{r.title} {j}'); r.save()
+duplicar as receitas mudando apenas os titulos e os slugs
 
 from django.utils.text import slugify
 for recipe in recipes: recipe.slug = slugify(recipe.title); recipe.save();
