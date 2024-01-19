@@ -109,3 +109,5 @@ test_recipe_search_can_find_recipe_by_title:
     só estou testando se a recipe foi enviada ao contexto, não estou testando o template (se a recipe foi de fato renderizada no template, nesse caso eu veria se o título da recipe 1 está no content da response, por exemplo)
 
 sobre o teste test_make_pagination_range_returns_a_pagination_range: eu tenho 20 páginas e a partir da página atual que o usuário está, a função tem que retornar as 4 páginas [1,2,3,4]
+
+ as views, eu passei o paginator como contexto para o home.html, mas estou usando ele no pagination.html. Pagination tem acesso a esses objetos que foram passados no contexto, porque home estende de base.html que por sua vez inclui pagination.html, logo, no final, tudo fica uma página só, por isso o págination.html possui acesso ao contexto passado para home.html.

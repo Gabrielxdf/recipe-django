@@ -1,5 +1,4 @@
 import math
-from tracemalloc import stop
 
 
 def make_pagination_range(
