@@ -117,6 +117,7 @@ paginator = Paginator(recipes, 9)
 # same thing as recipes above, but with pagination information
 page_obj = paginator.get_page(current_page)
 
-Python-dotenv
+Python-dotenv ajuda a configurar as variáveis de ambiente.
 É necessário fazer a configuração das variáveis de ambiente em pelo menos 3 locais: manage.py, asgi.py e wsgi.py. Se esquecer de um local pode gerar um grande problema dificil de ser encontrado no futuro.
-Toda vez que houver um arquivo .env-example, eu tenho que renomear esse arquivo para .env e alterar o conteúdo dele. Nesse arquivo fica guardado as variáveis de ambiente que devem estar relacionadas APENAS ao ambiente local, NUNCA deve ser compartilhado. Então o arquivo .env-example serve como um guia para cada desenvolvedor que pegar o projeto, conseguir criar e configurar suas próprias variáveis de ambiente.
+
+Toda vez que houver um arquivo .env-example, eu tenho que renomear esse arquivo para .env e alterar o conteúdo dele. Nesse arquivo fica guardado as variáveis de ambiente que devem estar relacionadas APENAS ao ambiente local e NUNCA deve ser compartilhado. Então o arquivo .env-example serve como um guia para cada desenvolvedor que pegar o projeto conseguir criar e configurar suas próprias variáveis de ambiente. Por isso no .env-example deve-se colocar valores fictícios para as variáveis de ambiente, de modo que guie o desenvolvedor a criar suas próprias variáveis.
