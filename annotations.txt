@@ -121,3 +121,23 @@ Python-dotenv ajuda a configurar as variáveis de ambiente.
 É necessário fazer a configuração das variáveis de ambiente em pelo menos 3 locais: manage.py, asgi.py e wsgi.py. Se esquecer de um local pode gerar um grande problema dificil de ser encontrado no futuro.
 
 Toda vez que houver um arquivo .env-example, eu tenho que renomear esse arquivo para .env e alterar o conteúdo dele. Nesse arquivo fica guardado as variáveis de ambiente que devem estar relacionadas APENAS ao ambiente local e NUNCA deve ser compartilhado. Então o arquivo .env-example serve como um guia para cada desenvolvedor que pegar o projeto conseguir criar e configurar suas próprias variáveis de ambiente. Por isso no .env-example deve-se colocar valores fictícios para as variáveis de ambiente, de modo que guie o desenvolvedor a criar suas próprias variáveis.
+
+FORMS
+Posso criar formulário usando from django.forms import Forms que é um formulário que não está ligado a dados nenhum.
+Ou usar django.forms import ModelForms que está atrelado a um Model específico, de modo que busca os dados e os salva nesse Model automaticamente.
+
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model: User
+        fields = '__all__' (todos os campos)
+        fields = 
+a classe meta serve para passar meta dados para o django, como por exemplo, qual Model que o form vai estar atrelado, quais campos desse model o django vai atrelar ao form.
+Só desse fazer esse pequeno trecho de código acima, o django já cria tudo, o form, faz todas as validações, CRUD, automaticamente.
+
+Após isso, passo o form para a view, e a view passa para o template. Do template posso renderizar o form facilmente com {{form}}
+
+def register_view(request):
+    form = RegisterForm()
+    return render(request, 'authors/pages/register_view.html', context={
+        'form': form
+    })
