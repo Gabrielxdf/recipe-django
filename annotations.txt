@@ -141,3 +141,18 @@ def register_view(request):
     return render(request, 'authors/pages/register_view.html', context={
         'form': form
     })
+
+request.session['number'] = request.session.get('number') or 1
+request.session['number'] += 1
+se existir esse número de vezes que o usuário acessou essa view (fez essa request), eu pego o valor atual e somo 1, se não existir defino o valor como 1.
+
+O django cria um cookie no navegador salvando no navegador, informando ao servidor django que esse 'number' está atrelado ao meu navegador. Essas são as sessões do navegador. Isso é a mesma coisa que o django utiliza para saber se um usuario está logado ou não, por exemplo.
+
+Iremos utilizar a session para trafegar dados de uma view (página) para outra.
+
+Salvando os dados do form na sessão request.session['register_form_data'] = request.POST
+request.POST é um dict com os valores passados para o POST
+
+def register_create() não renderiza nada, apenas trata os dados do POST, podendo fazer validação, processamentos e CRUD, após isso, ela envia os dados processados (redirect) para a register_view() que irá renderizar algo dizendo se o usuário foi criado com sucesso ou não.
+
+Ou seja, pego o POST com uma view diferente para evitar o problema de toda vez que atualizar a página fazer um POST de novo, depois faço o redirect para outra view, que será um GET, assim esse problema é evitado. Então toda vez que atualizo a página, estou fazendo apenas um GET, não um POST, pois não estou clicando no botão send, que levará ao def register_create(), não à propria view da página que estou, evitando assim multiplos POSTS. Uma view é responsável por tratar os dados do form e outra view por exibí-los.
