@@ -156,3 +156,7 @@ request.POST é um dict com os valores passados para o POST
 def register_create() não renderiza nada, apenas trata os dados do POST, podendo fazer validação, processamentos e CRUD, após isso, ela envia os dados processados (redirect) para a register_view() que irá renderizar algo dizendo se o usuário foi criado com sucesso ou não.
 
 Ou seja, pego o POST com uma view diferente para evitar o problema de toda vez que atualizar a página fazer um POST de novo, depois faço o redirect para outra view, que será um GET, assim esse problema é evitado. Então toda vez que atualizo a página, estou fazendo apenas um GET, não um POST, pois não estou clicando no botão send, que levará ao def register_create(), não à propria view da página que estou, evitando assim multiplos POSTS. Uma view é responsável por tratar os dados do form e outra view por exibí-los.
+
+def clean_password(): valida especificamente o campo password
+data = self.data pega os dados brutos do formulário, sem nenhum tratamento
+data = self.cleaned_data os dados já tratados pelo django. Retorna um dicionario cuja chave são os nomes dos campos.
