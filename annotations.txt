@@ -163,3 +163,5 @@ data = self.cleaned_data os dados já tratados pelo django. Retorna um dicionari
 
 Enquanto o método def clean_field(): valida um campo específico, o método def clean(): é um método mais genérico que valida o formulário como um todo e não, campo por campo, como por exemplo validando dependencias de campo (se password2 é igual a password, repetindo a senha).
 Esse método é chamado depois dos métodos clean_field().
+
+os validators serve para passar uma função que execute uma validação específica, para que o django execute com o valor desse campo quando o usuário enviar o formulário. 
