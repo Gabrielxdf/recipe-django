@@ -164,4 +164,9 @@ data = self.cleaned_data os dados já tratados pelo django. Retorna um dicionari
 Enquanto o método def clean_field(): valida um campo específico, o método def clean(): é um método mais genérico que valida o formulário como um todo e não, campo por campo, como por exemplo validando dependencias de campo (se password2 é igual a password, repetindo a senha).
 Esse método é chamado depois dos métodos clean_field().
 
-os validators serve para passar uma função que execute uma validação específica, para que o django execute com o valor desse campo quando o usuário enviar o formulário. 
+os validators serve para passar uma função que execute uma validação específica, para que o django execute com o valor desse campo quando o usuário enviar o formulário.
+
+dentro do unittest, tem os integration tests. No teste unitário, você testa exclusivamente a coisa que se quer testar. No teste de integração, você tem que fazer tudo se integrar (view, template, form, tudo tem que se integrar e dar o resultado esperado). Em outras palavras, teste unitário testa uma coisa exclusiva, e o teste de integração testa uma coisa em conjunto com outras coisas.
+
+DICA PARA SABER OQUE TESTAR: Tudo o que eu ponho a mão no código tenho que testar, como por exemplo add_placeholder(self.fields['username'], 'Your username'), aqui adicionei um placeholder manualmente, portanto, tenho que testar. Se eu usar as configurações padrão do campo, não preciso testar, pq isso já foi testado pelo django.
+Outro exemplo de código para testar: validações criadas pelo dev
