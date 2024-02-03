@@ -169,4 +169,7 @@ os validators serve para passar uma função que execute uma validação especí
 dentro do unittest, tem os integration tests. No teste unitário, você testa exclusivamente a coisa que se quer testar. No teste de integração, você tem que fazer tudo se integrar (view, template, form, tudo tem que se integrar e dar o resultado esperado). Em outras palavras, teste unitário testa uma coisa exclusiva, e o teste de integração testa uma coisa em conjunto com outras coisas.
 
 DICA PARA SABER OQUE TESTAR: Tudo o que eu ponho a mão no código tenho que testar, como por exemplo add_placeholder(self.fields['username'], 'Your username'), aqui adicionei um placeholder manualmente, portanto, tenho que testar. Se eu usar as configurações padrão do campo, não preciso testar, pq isso já foi testado pelo django.
-Outro exemplo de código para testar: validações criadas pelo dev
+Outro exemplo de código para testar: validações criadas pelo dev.
+
+Os testes serão onde irei me apoiar quando eu precisar adicionar novos recursos ou refatorar o código.
+Ver saber mais sobre SimpleTestCase, TransactionTestCase e TestCase, ver o site > https://docs.djangoproject.com/en/3.2/topics/testing/tools/#provided-test-case-classes
