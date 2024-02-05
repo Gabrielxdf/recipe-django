@@ -180,3 +180,5 @@ Neste teste de integração, não estarei testando o apenas o form, mas a url, a
 
 response = self.client.post(url, data=self.form_data, follow=True)
 follow=True para que a response siga o redirecionamento que a view register_create faz, para que tenhamos content e context que a register_view gera.
+
+Assim, temos os testes unitários e os testes de integração, são testes de dentro pra fora. Ainda existe os testes funcionais, que são testes de fora pra dentro, simulando a ação de um usuário no próprio navegador.
