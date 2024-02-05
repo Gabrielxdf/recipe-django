@@ -173,3 +173,10 @@ Outro exemplo de código para testar: validações criadas pelo dev.
 
 Os testes serão onde irei me apoiar quando eu precisar adicionar novos recursos ou refatorar o código.
 Ver saber mais sobre SimpleTestCase, TransactionTestCase e TestCase, ver o site > https://docs.djangoproject.com/en/3.2/topics/testing/tools/#provided-test-case-classes
+
+
+class AuthorRegisterFormIntegrationTest()
+Neste teste de integração, não estarei testando o apenas o form, mas a url, a view, o template e o form tudo junto. Testa-se todas as engrenagens necessária para que determinada ação funcione.
+
+response = self.client.post(url, data=self.form_data, follow=True)
+follow=True para que a response siga o redirecionamento que a view register_create faz, para que tenhamos content e context que a register_view gera.
