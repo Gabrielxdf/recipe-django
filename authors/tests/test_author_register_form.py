@@ -139,3 +139,7 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         response = self.client.post(url, data=self.form_data, follow=True)
         # here the password is equal, so the error should not exist.
         self.assertNotIn(msg, response.content.decode('utf-8'))
+
+    def test_authors_register_raises_404_if_get_method_is_used(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertEqual(response.status_code, 404)
