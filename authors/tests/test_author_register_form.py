@@ -141,5 +141,5 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         self.assertNotIn(msg, response.content.decode('utf-8'))
 
     def test_authors_register_raises_404_if_get_method_is_used(self):
-        response = self.client.get(reverse('recipes:search'))
+        response = self.client.get(reverse('authors:create'))
         self.assertEqual(response.status_code, 404)
