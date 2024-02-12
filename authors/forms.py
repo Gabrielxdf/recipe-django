@@ -25,6 +25,9 @@ def strong_password(password):
         ),
             code='invalid'
         )
+    ''' need to return the password or the return to password field is None
+    when ValidationError but the code never reach here if ValidationError '''
+    return password
 
 
 class RegisterForm(forms.ModelForm):
@@ -96,7 +99,7 @@ class RegisterForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email', '')
-        exists = User.objects.filter(email=email).exists()
+        exists = User.objects.filter(email=email).exists()  # object manager
 
         if exists:
             raise ValidationError(

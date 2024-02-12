@@ -182,3 +182,5 @@ response = self.client.post(url, data=self.form_data, follow=True)
 follow=True para que a response siga o redirecionamento que a view register_create faz, para que tenhamos content e context que a register_view gera.
 
 Assim, temos os testes unitários e os testes de integração, são testes de dentro pra fora. Ainda existe os testes funcionais, que são testes de fora pra dentro, simulando a ação de um usuário no próprio navegador.
+
+def strong_password(password): tem que retornar de alguma forma o valor, se não, se houver um ValidationError o valor retornado será None. Se a senha não estiver válida mas ainda forem iguais nos dois campos, isso causa um erro que não existe "password não é igual a password2" pois password chegou ao ValidationError, mas não teve seu valor retornado, ficando como None. Só que não tem como retornar o valor do password pois assim que se atinge o ValidationError já se atua como um retorno, assim nunca retornando a password original e ficando como None. Primeiro problema do Django que encontro.
