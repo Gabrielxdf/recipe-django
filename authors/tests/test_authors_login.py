@@ -16,4 +16,4 @@ class AuthorsLoginTest(TestCase):
 
     def test_authors_register_view_loads_the_correct_template(self):
         response = self.client.get(reverse('authors:login'))
-        self.assertTemplateUsed(response, 'authors/pages/login_view.html')
+        self.assertTemplateUsed(response, 'authors/pages/login.html')
