@@ -191,3 +191,5 @@ Fazemos isso no arquivo __init__.py que carrega inicialmente tudo que você prec
 Nesse arquivo temos from .register_form import RegisterForm. Quando importamos esse package, o arquivo init será inicializado e tudo oque constar no init já vai constar no package. Assim sendo, o Django, pytest e outras aplicações agora pensará que a classe RegisterForm está dentro do package forms, tratando ele como um módulo comum que tem uma classe dentro. Assim o Django entende que o package forms é o módulo padrão forms.py
 
 Quando um form não está atrelado a um Model não precisamos salvar ele na base de dados, como é o caso do LoginForm. Mas podemos fazer todo o resto, como validar os campos com clean_field() e clean(), depois checar se o formulário é valido com form.is_valid(), depois pegar os valores limpos de dentro desse formulário com super().clean() e fazer o que se deseja.
+
+'form_action': reverse('authors:login_create') se usa o reverse() para pegar dinamicamente o caminho correto da url pelo seu nome. Se a o caminho completo da URL mudar, não será um problema, e não precisarei refatorar o código.
