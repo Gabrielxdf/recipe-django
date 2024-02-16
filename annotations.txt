@@ -193,3 +193,6 @@ Nesse arquivo temos from .register_form import RegisterForm. Quando importamos e
 Quando um form não está atrelado a um Model não precisamos salvar ele na base de dados, como é o caso do LoginForm. Mas podemos fazer todo o resto, como validar os campos com clean_field() e clean(), depois checar se o formulário é valido com form.is_valid(), depois pegar os valores limpos de dentro desse formulário com super().clean() e fazer o que se deseja.
 
 'form_action': reverse('authors:login_create') se usa o reverse() para pegar dinamicamente o caminho correto da url pelo seu nome. Se a o caminho completo da URL mudar, não será um problema, e não precisarei refatorar o código.
+
+formulário válido não significa dados válidos. No LoginForm, após o form ser válido, é preciso verificar se o usuário também o é (autenticação).
+A função login no django faz automaticamente a criação da sessão, dos cookies e etc.
