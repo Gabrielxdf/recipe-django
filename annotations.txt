@@ -196,3 +196,8 @@ Quando um form não está atrelado a um Model não precisamos salvar ele na base
 
 formulário válido não significa dados válidos. No LoginForm, após o form ser válido, é preciso verificar se o usuário também o é (autenticação).
 A função login no django faz automaticamente a criação da sessão, dos cookies e etc.
+
+@login_required(login_url='authors:login', redirect_field_name='next')
+Quando o usuário tentar acessar alguma página restrita a apenas quem está logado, e ele não está, será redirecionado para a login_url, depois de fazer o login, o django te leva para o redirect_field_name, neste caso com o 'next', a ideia é que apenas leva o usuário de volta para onde ele estava tentando acessar sem estar logado. O redirect_field_name virá como um campo na querystring da URL e na minha aplicação posso fazer o redirect obtendo esse campo.
+
+#To do o restante do CRUD para o User
