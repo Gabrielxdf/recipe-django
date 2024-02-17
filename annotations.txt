@@ -200,4 +200,13 @@ A função login no django faz automaticamente a criação da sessão, dos cooki
 @login_required(login_url='authors:login', redirect_field_name='next')
 Quando o usuário tentar acessar alguma página restrita a apenas quem está logado, e ele não está, será redirecionado para a login_url, depois de fazer o login, o django te leva para o redirect_field_name, neste caso com o 'next', a ideia é que apenas leva o usuário de volta para onde ele estava tentando acessar sem estar logado. O redirect_field_name virá como um campo na querystring da URL e na minha aplicação posso fazer o redirect obtendo esse campo.
 
+{% csrf_token %} faz com que meu sistema só aceite requisições vindas pelo próprio sistema, não de fora. Para que alguém não envie algum link com /authors/logout/ para meu usuário e ao clicar ser deslogado, por exemplo.
+
+Na login_view:
+if not request.POST:
+Tem que ser um form com POST para podermos usar o csrf_token
+
+if request.POST.get('username') != request.user.username:
+pega o username do <input type="hidden" name="username" value="{{ request.user.username }}" /> que está no form. Isso serve para garantir que o POST tenha o usuário com o mesmo nome de usuário que está logado.
+
 #To do o restante do CRUD para o User
