@@ -210,3 +210,13 @@ if request.POST.get('username') != request.user.username:
 pega o username do <input type="hidden" name="username" value="{{ request.user.username }}" /> que está no form. Isso serve para garantir que o POST tenha o usuário com o mesmo nome de usuário que está logado.
 
 #To do o restante do CRUD para o User
+
+É assim que funciona a configuração do selenium > criar opções do webdriver, depois criar um service do webdriver e depois criar o webdriver do chrome.
+opções do webdriver > chrome_options > passa opções para o chrome quando for iniciar.
+service do webdriver > chrome_service > passa onde está o chromedriver
+webdriver do chrome > browser
+
+chrome_options.add_experimental_option("detach", True)
+o navegador está fechando automaticamente, então esta linha de código "desconecta" o navegador Chrome, que o mantém independente do programa python.
+
+a option '--headless' faz com que o navegador não seja aberto para o dev ver, o selenium faz tudo por baixo dos panos.
