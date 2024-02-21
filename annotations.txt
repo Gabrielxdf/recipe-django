@@ -220,3 +220,10 @@ chrome_options.add_experimental_option("detach", True)
 o navegador está fechando automaticamente, então esta linha de código "desconecta" o navegador Chrome, que o mantém independente do programa python.
 
 a option '--headless' faz com que o navegador não seja aberto para o dev ver, o selenium faz tudo por baixo dos panos.
+
+Testes funcionais, embora testem somente uma coisa assim como os testes unitários e testes de integração, contam uma história completa, por exemplo: "usuário abriu navegador, usuário abriu a página home, usuário buscou por receitas ... usuário concluiu a operação.". Ao contrário do teste unitário, que é, por exemplo: "a label do campo x é y?". Teste funcional é muito mais amplo.
+
+Testes funcionais precisam do from django.test import LiveServerTestCase, pois é necessário subir um servidor para fazer os testes. Após os testes o servidor é desmontado automaticamente. Também é preciso criar as fixtures, como nos testes unitários.
+
+LiveServerTestCase não sobe os arquivos estáticos para o servidor propositalmente, porque geralmente se testa a lógica, não os arquivos estáticos.
+Já o from django.contrib.staticfiles.testing import StaticLiveServerTestCase sobe os arquivos estáticos para o servidor.
