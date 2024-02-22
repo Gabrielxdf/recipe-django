@@ -227,3 +227,11 @@ Testes funcionais precisam do from django.test import LiveServerTestCase, pois �
 
 LiveServerTestCase não sobe os arquivos estáticos para o servidor propositalmente, porque geralmente se testa a lógica, não os arquivos estáticos.
 Já o from django.contrib.staticfiles.testing import StaticLiveServerTestCase sobe os arquivos estáticos para o servidor.
+
+As marcações são apenas do pytest, e não do unittest. Essas marcações apenas o test runner do pytest irá entender. Neste projeto, estou escrevendo testes em unittest, mas usando o test runner do pytest para executá-los.
+Geralmente testes unitários são rápidos, e funcionais lentos.
+
+No pytest.ini estou usando o strict-markers, então preciso declarar esses markers neste arquivo, se não estivesse usando o strict-markers, não precisaria fazer isso.
+@pytest.mark.functional_test <- exemplo de marker que se coloca em cima do método ou da classe.
+pytest -m 'functional_test' <- exemplo de código pytest que executará apenas os testes com esse marker.
+pytest -m 'not functional_test' <- exemplo de código pytest que executará todos os testes menos os que tem esse marker.
