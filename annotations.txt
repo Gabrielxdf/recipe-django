@@ -240,3 +240,5 @@ pytest -k 'test_recipe_home_page_without_recipes_error_not_found_message' <- exe
 Mixin é um padrão de projeto em que classes mixins são sacos de métodos, as outras classes não tem relação nenhuma com essa classe em termos de herança, apenas utiliza seus métodos. Ou seja, as outras classes apenas herda os métodos da classe mixin, sem relações de herança e lógica.
 
 class RecipeTestBase(TestCase, RecipeMixin): Como o python permite herança múltipla, ao fazer isso, apenas obtenho os métodos da classe mixin, sem sobrescrever nada.
+
+Com o selenium, geralmente se testa o que eu testaria manualmente, como desenvolvedor. Por exemplo, abrir uma página, achar um botão, digital algo num input, criar um usuário, etc. Testando com o selenium temos que esquecer que somos desenvolvedores e testar como um usuário comum da aplicação.
