@@ -244,3 +244,10 @@ class RecipeTestBase(TestCase, RecipeMixin): Como o python permite herança múl
 Com o selenium, geralmente se testa o que eu testaria manualmente, como desenvolvedor. Por exemplo, abrir uma página, achar um botão, digital algo num input, criar um usuário, etc. Testando com o selenium temos que esquecer que somos desenvolvedores e testar como um usuário comum da aplicação.
 
 Sempre que criar uma pasta para testes é preciso fazer o __init__.py
+
+first_name_field.send_keys(Keys.ENTER)
+    form = self.browser.find_element(
+        By.XPATH,
+        '/html/body/main/div[2]/form'  # full xpath from browser
+    )
+Depois de ter pressionado ENTER tenho que selecionar o form novamente, porque o anterior não existe mais, visto que a página foi atualizada quando foi pressionado o ENTER.
