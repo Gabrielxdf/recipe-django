@@ -37,7 +37,8 @@ class RegisterForm(forms.ModelForm):
         label='Last name'
     )
     email = forms.EmailField(
-        error_messages={'required': 'E-mail is required'},
+        error_messages={'required': 'E-mail is required',
+                        'invalid': 'The e-mail must be valid'},
         label='E-mail',
         help_text='The e-mail must be valid.',
     )

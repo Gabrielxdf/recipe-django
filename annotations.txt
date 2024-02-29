@@ -251,3 +251,5 @@ first_name_field.send_keys(Keys.ENTER)
         '/html/body/main/div[2]/form'  # full xpath from browser
     )
 Depois de ter pressionado ENTER tenho que selecionar o form novamente, porque o anterior não existe mais, visto que a página foi atualizada quando foi pressionado o ENTER.
+
+def form_field_test_with_callback(self, callback): callback é uma função que você chama depois de determinadas coisas, depois de fazer coisa primeiro.
