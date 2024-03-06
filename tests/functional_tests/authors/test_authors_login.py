@@ -47,3 +47,25 @@ class AuthorsLoginFunctionalTest(AuthorsBaseFunctionalTest):
             self.browser.find_element(By.TAG_NAME, 'body').text
         )
         self.sleep(0.5)
+
+    def test_form_login_is_invalid(self):
+        # User opens the login page
+        self.browser.get(self.live_server_url + reverse('authors:login'))
+
+        # User sees the login form
+        form = self.browser.find_element(By.CLASS_NAME, 'main-form')
+
+        # And tries to send empty values
+        username = self.get_by_placeholder(form, 'Type your username')
+        password = self.get_by_placeholder(form, 'Type your password')
+        username.send_keys(' ')
+        password.send_keys(' ')
+
+        # Submit the form
+        form.submit()
+
+        # Sees a error message in the screen
+        self.assertIn(
+            'Invalid username or password.',
+            self.browser.find_element(By.TAG_NAME, 'body').text
+        )
