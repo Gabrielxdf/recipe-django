@@ -257,3 +257,21 @@ def form_field_test_with_callback(self, callback): callback é uma função que 
 Ao mexer no código, se eu quebrar um teste propositalmente (mudar algo no código propositalmente que você sabe que vai quebrar o teste), eu refatoro o teste, se não, eu refatoro o código.
 
 Criando a página inicial da dashboard (admin do autor). Se você for disponibilizar uma área onde o usuário possa manipular coisas dentro do sistema, faz essa área do 0. Não use o dashboard padrão do django.
+
+Sempre que tivermos um form com arquivos
+  <form
+  class="main-form"
+  action="{{ form_action }}"
+  method="POST"
+  enctype="multipart/form-data"
+  >
+  Deve ter o enctype. Isso informa tanto para o navegador quanto para o servidor que esse form também trafegará arquivos, e não apenas texto.
+  O servidor agora precisa saber que também receberá arquivos como dados.
+
+    form = AuthorRecipeForm(
+    data=request.POST or None,
+    files=request.FILES or None,
+    instance=recipe
+)
+
+No django isso é feito pela linha files. Portanto, request.POST vem dados de texto e request.FILES vem arquivos binários.
