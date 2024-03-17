@@ -147,3 +147,7 @@ def dashboard_recipe_edit(request, id):
             'form': form,
         }
     )
+
+
+def view_recipe_creat():
+    ...
