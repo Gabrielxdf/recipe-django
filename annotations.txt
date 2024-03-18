@@ -275,3 +275,7 @@ Sempre que tivermos um form com arquivos
 )
 
 No django isso é feito pela linha files. Portanto, request.POST vem dados de texto e request.FILES vem arquivos binários.
+
+
+def dashboard_recipe_create(): essa é a view
+Então apartemente quando acesso uma determinada URL a view é chamda, mas quando dou submit em um botão a view também é chamada. Só assim é possível salvar o form. Através dessa segunda chamada da view. (Ver o código da view.)

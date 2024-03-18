@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.text import slugify
 
 from authors.forms.recipe_form import AuthorRecipeForm
 from recipes.models import Recipe
@@ -149,5 +150,30 @@ def dashboard_recipe_edit(request, id):
     )
 
 
-def view_recipe_creat():
-    ...
+@login_required(login_url='authors:login', redirect_field_name='next')
+def dashboard_recipe_create(request):
+    form = AuthorRecipeForm(
+        data=request.POST or None,
+        files=request.FILES or None
+    )
+
+    if form.is_valid():
+        recipe = form.save(commit=False)
+
+        recipe.author = request.user
+        recipe.preparation_steps_is_html = False
+        recipe.is_published = False
+        recipe.slug = slugify(recipe.title)
+
+        recipe.save()
+
+        messages.success(request, 'Your recipe has been created successfully!')
+        return redirect(reverse('authors:dashboard'))
+
+    return render(
+        request,
+        'authors/pages/dashboard_recipe.html',
+        context={
+            'form': form,
+        }
+    )
