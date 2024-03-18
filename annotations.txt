@@ -279,3 +279,17 @@ No django isso é feito pela linha files. Portanto, request.POST vem dados de te
 
 def dashboard_recipe_create(): essa é a view
 Então apartemente quando acesso uma determinada URL a view é chamda, mas quando dou submit em um botão a view também é chamada. Só assim é possível salvar o form. Através dessa segunda chamada da view. (Ver o código da view.)
+
+
+from collections import defaultDict
+self._my_errors = defaultdict(list) faz com que eu crie um dicionário e qualquer chave que eu criar nesse dict vai ter como padrão uma lista vazia, inicialmente.
+self._my_errors['frutas'].append('banana') -> Crio uma chave que já tem uma lista associada. Isso me permite não ficar fazendo IF se existe a chave. Se não existir é criado, se existir faz o append.
+
+if len(title) < 5:
+    self._my_errors['title'].append('Title Must have at least 5 chars.')
+
+Em vez de fazer um raise ValidationError de um por um erro, estamos juntando todos os erros de todos os campos para mostrar de uma vez para o usuário. Um campo pode ter mais de um erro, por isso o uso de uma lista.
+
+if self._my_errors:
+    raise ValidationError(self._my_errors)
+Por fim, aqui exibe todos os erros em todos os campos de uma vez para o usuário.

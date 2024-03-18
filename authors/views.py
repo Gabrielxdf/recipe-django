@@ -1,5 +1,3 @@
-from lib2to3.fixes.fix_has_key import FixHasKey
-
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
