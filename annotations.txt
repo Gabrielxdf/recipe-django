@@ -293,3 +293,27 @@ Em vez de fazer um raise ValidationError de um por um erro, estamos juntando tod
 if self._my_errors:
     raise ValidationError(self._my_errors)
 Por fim, aqui exibe todos os erros em todos os campos de uma vez para o usuário.
+
+Class Based Views (CBV) não é uma alternativa as Function Based Views, não é para substituir.
+As CBV tem uma sequência de métodos que são executados em ordem.
+Por exemplo, a classe View base tem os seguintes métodos:
+1 - setup()
+2 - dispatch()
+3 - http_method_not_allowed()
+4 - options()
+executados nessa sequência.
+
+Já a DetailView tem o seguinte Fluxograma de métodos
+1 - setup()
+2 - dispatch()
+3 - http_method_not_allowed()
+4 - get_template_names()
+5 - get_slug_field()
+6 - get_queryset()
+7 - get_object()
+8 - get_context_object_name()
+9 - get_context_data()
+10 - get()
+11 - render_to_response()
+
+Mixin é um padrão de projeto utilizado para adicionar funcionalidades externas à uma família de heranças. São classes que utilizamos para adicionarmos coisas em outras classes/cadeia de heranças. 
