@@ -96,7 +96,7 @@ def dashboard(request):
     recipes = Recipe.objects.filter(
         is_published=False,
         author=request.user
-    )
+    ).order_by('-id')
     return render(
         request,
         'authors/pages/dashboard.html',
