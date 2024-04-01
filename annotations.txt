@@ -317,3 +317,17 @@ Já a DetailView tem o seguinte Fluxograma de métodos
 11 - render_to_response()
 
 Mixin é um padrão de projeto utilizado para adicionar funcionalidades externas à uma família de heranças. São classes que utilizamos para adicionarmos coisas em outras classes/cadeia de heranças.
+
+POO
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def setup(self, *args, **kwargs):
+        return super().setup(*args, **kwargs)
+
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+Estou sobreescrevendo esses métodos. Sempre preciso retornar o super deles. Com exceção do __init__ que não é necessário, apenas chama o super.
+
+get_queryset() manipula a QuerySet
+get_context_data() manipula o contexto
