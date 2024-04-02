@@ -42,6 +42,26 @@ class RecipeListViewHome(RecipeListViewBase):
     template_name = 'recipes/pages/home.html'
 
 
+class RecipeListViewCategory(RecipeListViewBase):
+    template_name = 'recipes/pages/category.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        qs = qs.filter(
+            category__id=self.kwargs['category_id'],
+            is_published=True,
+        )
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        title = f"{ctx.get('recipes')[0].category.name} - Category | "
+        ctx.update(
+            {'title': title}
+        )
+        return ctx
+
+
 def home(request):
     recipes = Recipe.objects.filter(
         is_published=True
