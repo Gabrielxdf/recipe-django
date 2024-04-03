@@ -12,7 +12,7 @@ class RecipeHomeViewTest(RecipeTestBase):
         """Testing if the URL calls the correct view function."""
 
         view = resolve(reverse('recipes:home'))
-        self.assertIs(view.func, views.home)
+        self.assertIs(view.func.view_class, views.RecipeListViewHome)
 
     def test_recipe_home_view_returns_status_code_200_OK(self):
         response = self.client.get(reverse('recipes:home'))
