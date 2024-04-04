@@ -10,7 +10,7 @@ class RecipeDetailViewTest(RecipeTestBase):
         """Testing if the URL calls the correct view function."""
 
         view = resolve(reverse('recipes:recipe', args=(1,)))
-        self.assertIs(view.func, views.recipe)
+        self.assertIs(view.func.view_class, views.RecipeDetailView)
 
     def test_recipe_detail_view_returns_404_if_no_recipes_found(self):
         response = self.client.get(
@@ -32,7 +32,7 @@ class RecipeDetailViewTest(RecipeTestBase):
         self.make_recipe(title=needed_title)
 
         response = self.client.get(
-            reverse('recipes:recipe', kwargs={'id': 1}))
+            reverse('recipes:recipe', kwargs={'pk': 1}))
         content = response.content.decode('utf-8')
 
         # check if one recipe exists
@@ -45,5 +45,5 @@ class RecipeDetailViewTest(RecipeTestBase):
         recipe = self.make_recipe(is_published=False)
 
         response = self.client.get(
-            reverse('recipes:recipe', kwargs={'id': recipe.id}))
+            reverse('recipes:recipe', kwargs={'pk': recipe.id}))
         self.assertEqual(response.status_code, 404)
