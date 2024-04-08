@@ -1,7 +1,6 @@
 import os
 
 from django.db.models import Q
-from django.db.models.query import QuerySet
 from django.http.response import Http404
 from django.views.generic import DetailView, ListView
 
