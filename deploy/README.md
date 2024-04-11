@@ -42,14 +42,55 @@ ssh IP_OU_HOST -i CAMINHO+NOME_DA_CHAVE
 A primeira coisa será atualizar tudo:
 
 ```
-sudo apt update -y;
-sudo apt upgrade -y;
-sudo apt autoremove -y;
-sudo apt install build-essential -y;
-sudo apt install python3.9 python3.9-venv python3.9-dev -y;
-sudo apt install nginx -y;
-sudo apt install certbot python3-certbot-nginx -y;
-sudo apt install postgresql postgresql-contrib -y;
-sudo apt install libpq-dev -y;
-sudo apt install git;
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt autoremove -y
+sudo apt install build-essential -y
+sudo apt install python3.9 python3.9-venv python3.9-dev -y
+sudo apt install nginx -y
+sudo apt install certbot python3-certbot-nginx -y
+sudo apt install postgresql postgresql-contrib -y
+sudo apt install libpq-dev -y
+sudo apt install git
+```
+
+## Instalando o PostgreSQL
+
+```
+# Nós fizemos isso acima
+sudo apt install postgresql postgresql-contrib -y
+```
+
+Caso queira mais detalhes: https://youtu.be/VLpPLaGVJhI  
+Mais avançado: https://youtu.be/FZaEukN_raA
+
+### Configurações
+
+```
+sudo -u postgres psql
+
+# Criando um super usuário
+CREATE ROLE usuario WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'senha';
+
+# Criando a base de dados
+CREATE DATABASE basededados WITH OWNER usuario;
+
+# Dando permissões
+GRANT ALL PRIVILEGES ON DATABASE basededados TO usuario;
+
+# Saindo
+\q
+
+sudo systemctl restart postgresql
+```
+
+Caso queira mais detalhes: https://youtu.be/VLpPLaGVJhI  
+Mais avançado: https://youtu.be/FZaEukN_raA
+
+## Configurando o git
+
+```
+git config --global user.name 'Seu nome'
+git config --global user.email 'seu_email@gmail.com'
+git config --global init.defaultBranch main
 ```
