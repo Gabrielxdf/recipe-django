@@ -331,3 +331,6 @@ Estou sobreescrevendo esses métodos. Sempre preciso retornar o super deles. Com
 
 get_queryset() manipula a QuerySet
 get_context_data() manipula o contexto
+
+ssh cursodjango 'cd ~/app_repo ; git pull origin main ; sudo systemctl restart curso_django'
+comando para fazer alterações locais e atualizar no servidor de maneira fácil. Esse comando entra no servidor, faz o git pull e restarta o socket do gunicorn.
