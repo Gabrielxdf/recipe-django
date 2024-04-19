@@ -336,3 +336,8 @@ ssh cursodjango 'cd ~/app_repo ; git pull origin main ; sudo systemctl restart c
 comando para fazer alterações locais e atualizar no servidor de maneira fácil. Esse comando entra no servidor, faz o git pull e restarta o socket do gunicorn.
 
 django debug toolbar me dá informações de debug afim de que eu melhore a performance do sistema.
+
+O problema N+1 que estavamos tendo nas consultas é que pra cada busca de uma receita, o sistema faz outra busca para categoria e outra busca para o autor, quando poderia fazer tudo numa busca só.
+O Django fornece duas soluções:
+select_related() -> faz um "follow" das relações de chave estrangeiras. Ou seja, ele verifica as relações que precisam ser buscadas na base de dados e busca todas de uma vez, fazendo uma consulta mais complexa, mas fazendo apenas uma vez. Em SQL ele está fazendo um Join.
+select_related() -> É mais comum em relações many-to-many
