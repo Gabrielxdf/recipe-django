@@ -341,3 +341,10 @@ O problema N+1 que estavamos tendo nas consultas é que pra cada busca de uma re
 O Django fornece duas soluções:
 select_related() -> faz um "follow" das relações de chave estrangeiras. Ou seja, ele verifica as relações que precisam ser buscadas na base de dados e busca todas de uma vez, fazendo uma consulta mais complexa, mas fazendo apenas uma vez. Em SQL ele está fazendo um Join.
 select_related() -> É mais comum em relações many-to-many
+
+As querysets do django são lazy, elas não são executadas até quando eu realmente precisar do valor. Mesmo que eu escreva o código da consulta, mas não use o resultado, o django não executa essa consulta. Por exemplo
+    recipes = Recipe.objects.all()
+Estou chamando o método all do object manager do meu model Recipe. Isso retornará todos as instâncias de recipes.
+Porém o django não executa de fato essa query até eu precisar desse valor, como na linha a seguir:
+    print(recipes[0].title)
+Além disso, eu pedi todos os objetos Recipe, mas o django só retorna o objeto que eu usei o resultado de fato, nesse caso o recipes[0].

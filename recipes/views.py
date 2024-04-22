@@ -165,7 +165,14 @@ class RecipeDetailViewApi(RecipeDetailView):
 
 
 def theory(request, *args, **kwargs):
+    recipes = Recipe.objects.all()
+    print(recipes[5].title)
+
+    context = {
+        'recipes': recipes,
+    }
     return render(
         request,
-        'recipes/pages/theory.html'
+        'recipes/pages/theory.html',
+        context=context
     )
