@@ -165,8 +165,16 @@ class RecipeDetailViewApi(RecipeDetailView):
 
 
 def theory(request, *args, **kwargs):
-    recipes = Recipe.objects.all()
-    print(recipes[5].title)
+    recipes = Recipe.objects.filter(
+        Q(
+            Q(title__icontains='da',
+              id__gt=2,
+              is_published=True,) |
+            Q(
+                id__gt=1000
+            )
+        )
+    )[:10]
 
     context = {
         'recipes': recipes,

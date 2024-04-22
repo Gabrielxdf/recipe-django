@@ -348,3 +348,7 @@ Estou chamando o método all do object manager do meu model Recipe. Isso retorna
 Porém o django não executa de fato essa query até eu precisar desse valor, como na linha a seguir:
     print(recipes[0].title)
 Além disso, eu pedi todos os objetos Recipe, mas o django só retorna o objeto que eu usei o resultado de fato, nesse caso o recipes[0].
+
+Os métodos filter, orderby e etc são métodos que manipulam querysets, então só podem ser executados sobre uma queryset, nunca sobre um unico objeto do model. Os métodos get, first, last e etc retornam apenas um objeto, e portanto, não podem mais ser manipulados pelos métodos de querysets.
+
+Todos os parâmetros do método filter utiliza AND como padrão. Para fazer uma consulta OR, preciso importar o objeto Q
