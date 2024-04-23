@@ -351,4 +351,7 @@ Além disso, eu pedi todos os objetos Recipe, mas o django só retorna o objeto 
 
 Os métodos filter, orderby e etc são métodos que manipulam querysets, então só podem ser executados sobre uma queryset, nunca sobre um unico objeto do model. Os métodos get, first, last e etc retornam apenas um objeto, e portanto, não podem mais ser manipulados pelos métodos de querysets.
 
-Todos os parâmetros do método filter utiliza AND como padrão. Para fazer uma consulta OR, preciso importar o objeto Q
+Todos os parâmetros do método filter utiliza AND com    o padrão. Para fazer uma consulta OR, preciso importar o objeto Q.
+
+Além de fazer consultas complexas, podemos referenciar campos, podendo até ser campos de outros modelos. Podemos fazer isso com o objeto F.
+filter(id=F('author__id'))
