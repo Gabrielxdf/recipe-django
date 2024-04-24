@@ -355,3 +355,5 @@ Todos os parâmetros do método filter utiliza AND com    o padrão. Para fazer 
 
 Além de fazer consultas complexas, podemos referenciar campos, podendo até ser campos de outros modelos. Podemos fazer isso com o objeto F.
 filter(id=F('author__id'))
+
+Recipe.objects.values('id', 'title', 'author__username') Seleciona os campos que você quer. Isso evita uma consulta gulosa (que traz todos os campos e é o padrão) e faz uma consulta mais magra. Retorna um dicionário.
