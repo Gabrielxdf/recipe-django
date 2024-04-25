@@ -166,7 +166,7 @@ class RecipeDetailViewApi(RecipeDetailView):
 
 def theory(request, *args, **kwargs):
     recipes = Recipe.objects\
-        .values('id', 'title', 'author__username')[:10]
+        .values('id', 'title')
 
     context = {
         'recipes': recipes,

@@ -357,3 +357,8 @@ Além de fazer consultas complexas, podemos referenciar campos, podendo até ser
 filter(id=F('author__id'))
 
 Recipe.objects.values('id', 'title', 'author__username') Seleciona os campos que você quer. Isso evita uma consulta gulosa (que traz todos os campos e é o padrão) e faz uma consulta mais magra. Retorna um dicionário.
+
+O método only() é similar ao values() selecionando os campos. Mas retorna um objeto de recipe em vez de um dicionário.
+Recipe.objects.values('id', 'title'). Só deve ser usado quando você souber oque está fazendo, pois se o seu template (ou código) precisar de um campo que não foi especificado no only, ele irá fazer uma consulta para cada um dos objetos para buscar o campo que falta, e isso é péssimo pro desempenho.
+O método defer() é o contrário do only. Em vez de selecionar apenas (only) uns campos específicos para a consulta, eu seleciono todos mas excluo os campos especificados. Acontece o mesmo problema do only() quando se é usado um campo que não foi especificado.
+Já no método values() quando um campo não é especificado e é usado, o método values não busca esse campo.

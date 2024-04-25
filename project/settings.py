@@ -156,5 +156,4 @@ MESSAGE_TAGS = {
 # Django Debug Toolbar
 INTERNAL_IPS = [
     '127.0.0.1',
-    '34.16.217.39',
 ]
