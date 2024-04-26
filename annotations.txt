@@ -362,3 +362,7 @@ O método only() é similar ao values() selecionando os campos. Mas retorna um o
 Recipe.objects.values('id', 'title'). Só deve ser usado quando você souber oque está fazendo, pois se o seu template (ou código) precisar de um campo que não foi especificado no only, ele irá fazer uma consulta para cada um dos objetos para buscar o campo que falta, e isso é péssimo pro desempenho.
 O método defer() é o contrário do only. Em vez de selecionar apenas (only) uns campos específicos para a consulta, eu seleciono todos mas excluo os campos especificados. Acontece o mesmo problema do only() quando se é usado um campo que não foi especificado.
 Já no método values() quando um campo não é especificado e é usado, o método values não busca esse campo.
+
+recipes = Recipe.objects.values('id', 'title')[:5]
+number_of_recipes = recipes.aggregate(number=Count('id'))
+No .aggregate posso usar funções de agregação do SQL como Count, Min, Max e etc. Nesse caso o count será 5, pois estou contando todas as receitas da queryset recipes.
