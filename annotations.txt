@@ -366,3 +366,9 @@ Já no método values() quando um campo não é especificado e é usado, o méto
 recipes = Recipe.objects.values('id', 'title')[:5]
 number_of_recipes = recipes.aggregate(number=Count('id'))
 No .aggregate posso usar funções de agregação do SQL como Count, Min, Max e etc. Nesse caso o count será 5, pois estou contando todas as receitas da queryset recipes.
+
+Método annotate() cria um novo campo e valore na queryset.
+Recipe.objects.all().annotate(author_full_name=...)
+Estou criando um campo chamado author_full_name que antes não existia.
+
+A função Concat() serve para fazer concatenações de valores. A função Value() cria valores passíveis de manipulação.
