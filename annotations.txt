@@ -382,3 +382,6 @@ class RecipeManager(models.Manager):
 Estou criando meu próprio manager. Depois é só instanciar.
 class Recipe(models.Model):
     objects = RecipeManager() # posso até trocar o nome do meu manager.
+
+o framework padrão do django contenttypes nos permite fazer relações genéricas entre apps, para que o app possa ser transportado para outro projeto ou até reutilizado em outro app de maneira genérica, sem dependencias.
+Criamos um app de tags que poderá ser transportado para qualquer lugar da aplicação (autores, receitas, categorias, ele não vai depender de nada da aplicação), ou até para outro projeto.
