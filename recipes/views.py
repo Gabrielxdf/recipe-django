@@ -1,8 +1,7 @@
 import os
 
-from django.db.models import F, Q, Value
+from django.db.models import Q
 from django.db.models.aggregates import Count
-from django.db.models.functions import Concat
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.http.response import Http404
@@ -167,13 +166,8 @@ class RecipeDetailViewApi(RecipeDetailView):
 
 
 def theory(request, *args, **kwargs):
-    recipes = Recipe.objects.all().annotate(
-        author_full_name=Concat(
-            F('author__first_name'), Value(' '),
-            F('author__last_name'), Value(' ('),
-            F('author__username'), Value(')')
-        )
-    )
+    recipes = Recipe.objects.get_published()
+
     number_of_recipes = recipes.aggregate(number=Count('id'))
     context = {
         'recipes': recipes,

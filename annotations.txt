@@ -372,3 +372,13 @@ Recipe.objects.all().annotate(author_full_name=...)
 Estou criando um campo chamado author_full_name que antes não existia.
 
 A função Concat() serve para fazer concatenações de valores. A função Value() cria valores passíveis de manipulação.
+
+Os managers em django são o gateway entre o código e a base de dados, converte o código para querys na base de dados.
+É possível sobreescrever o manager ou criar seu próprio manager, porque o Django é feito em Python, e o Python nos fornece essa funcionalidade.
+Recipes.objects.all() -> objects é o manager.
+
+class RecipeManager(models.Manager):
+    ...
+Estou criando meu próprio manager. Depois é só instanciar.
+class Recipe(models.Model):
+    objects = RecipeManager() # posso até trocar o nome do meu manager.
