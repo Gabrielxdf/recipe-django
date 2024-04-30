@@ -7,7 +7,7 @@ from django.db import models
 from django.utils.text import slugify
 
 
-class Tag(models.model):
+class Tag(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
 
@@ -17,7 +17,7 @@ class Tag(models.model):
     # represents the model we want to fit here
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     # represents the model's row id described above
-    object_id = models.CharField()
+    object_id = models.CharField(max_length=255)
     # A field that represents the generic relationship that knows
     # the fields above (content_type and object_id)
     content_object = GenericForeignKey('content_type', 'object_id')
