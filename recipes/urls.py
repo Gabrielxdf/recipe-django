@@ -16,6 +16,11 @@ urlpatterns = [
         name="search"
     ),
     path(
+        'recipes/tag/<slug:slug>/',  # <type: parameter_name>
+        views.RecipeListViewTag.as_view(),
+        name="tag"
+    ),
+    path(
         'recipes/category/<int:category_id>/',
         views.RecipeListViewCategory.as_view(),
         name="category"

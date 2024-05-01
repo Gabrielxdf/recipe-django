@@ -5,10 +5,10 @@ from django.db.models.aggregates import Count
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.http.response import Http404
-from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 
+from tag.models import Tag
 from utils.pagination import make_pagination
 
 from .models import Recipe
@@ -89,15 +89,16 @@ class RecipeListViewCategory(RecipeListViewBase):
 
 
 class RecipeListViewSearch(RecipeListViewBase):
+
     template_name = 'recipes/pages/search.html'
 
     def get_queryset(self, *args, **kwargs):
-        qs = super().get_queryset(*args, **kwargs)
         search_term = self.request.GET.get('q', '').strip()
 
         if not search_term:
             raise Http404()
 
+        qs = super().get_queryset(*args, **kwargs)
         qs = qs.filter(
             Q(title__icontains=search_term) |
             Q(description__icontains=search_term),
@@ -117,6 +118,33 @@ class RecipeListViewSearch(RecipeListViewBase):
                 'page_title': page_title,
                 'search_term': search_term,
                 'additional_url_query': additional_url_query
+            }
+        )
+        return ctx
+
+
+class RecipeListViewTag(RecipeListViewBase):
+    template_name = 'recipes/pages/tag.html'
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        qs = qs.filter(tags__slug=self.kwargs.get('slug', ''))
+        qs = qs.prefetch_related('tags')
+        return qs
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super().get_context_data(*args, **kwargs)
+        page_title = Tag.objects \
+            .filter(slug=self.kwargs.get('slug', '')).first()
+
+        if not page_title:
+            page_title = 'No recipes found'
+
+        page_title = f'{page_title} - Tag |'
+
+        ctx.update(
+            {
+                'page_title': page_title,
             }
         )
         return ctx
