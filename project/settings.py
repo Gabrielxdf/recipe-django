@@ -35,7 +35,7 @@ ALLOWED_HOSTS: list[str] = parse_comma_sep_str_to_list(
     get_env_variable('ALLOWED_HOSTS')
 )
 CSRF_TRUTED_ORIGINS: list[str] = parse_comma_sep_str_to_list(
-    get_env_variable('CSRF_TRUTED_ORIGINS')
+    get_env_variable('CSRF_TRUSTED_ORIGINS')
 )
 
 
