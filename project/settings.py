@@ -32,7 +32,7 @@ DEBUG = True if os.environ.get('DEBUG') == '1' else False
 # DEBUG = os.environ.get("DEBUG", "0") == "1" <- Without if
 
 ALLOWED_HOSTS: list[str] = parse_comma_sep_str_to_list(
-    get_env_variable('ALLOWED_HOST')
+    get_env_variable('ALLOWED_HOSTS')
 )
 CSRF_TRUTED_ORIGINS: list[str] = parse_comma_sep_str_to_list(
     get_env_variable('CSRF_TRUTED_ORIGINS')
