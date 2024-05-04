@@ -15,6 +15,8 @@ from pathlib import Path
 
 from django.contrib.messages import constants
 
+from utils.environment import get_env_variable, parse_comma_sep_str_to_list
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,7 +31,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'INSECURE')
 DEBUG = True if os.environ.get('DEBUG') == '1' else False
 # DEBUG = os.environ.get("DEBUG", "0") == "1" <- Without if
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS: list[str] = parse_comma_sep_str_to_list(
+    get_env_variable('ALLOWED_HOST')
+)
+CSRF_TRUTED_ORIGINS: list[str] = parse_comma_sep_str_to_list(
+    get_env_variable('CSRF_TRUTED_ORIGINS')
+)
 
 
 # Application definition
