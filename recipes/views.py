@@ -27,7 +27,8 @@ class RecipeListViewBase(ListView):
         qs = qs.filter(
             is_published=True,
         )
-        qs = qs.select_related('author', 'category')
+        qs = qs.select_related('author', 'category', 'author__profile')
+        qs = qs.prefetch_related('tags')
         return qs
 
     def get_context_data(self, *args, **kwargs):
@@ -129,7 +130,6 @@ class RecipeListViewTag(RecipeListViewBase):
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)
         qs = qs.filter(tags__slug=self.kwargs.get('slug', ''))
-        qs = qs.prefetch_related('tags')
         return qs
 
     def get_context_data(self, *args, **kwargs):
