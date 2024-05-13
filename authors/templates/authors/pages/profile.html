@@ -1,0 +1,19 @@
+{% extends 'global/base.html' %}
+
+{% block title %}
+  Profile |
+{% endblock %}
+
+{% block content %}
+  <div class="main-content center container">
+    <h2>{{ profile.author.username }}</h2>
+
+    {% if profile.cover %}
+      <div class="profile-cover">
+        <a href="{{ profile.get_absolute_url }}"><img src="{{ profile.cover.url }}" width="400" height="500" alt="profile-cover" /></a>
+      </div>
+    {% endif %}
+
+    <p>{{ profile.bio }}</p>
+  </div>
+{% endblock %}
