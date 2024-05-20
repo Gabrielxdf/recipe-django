@@ -76,7 +76,7 @@ class Recipe(models.Model):
         return reverse('recipes:recipe', args=(self.id,))
 
     @staticmethod
-    def resize_image(image, new_width=800):
+    def resize_image(image, new_width=840):
         image_full_path = os.path.join(settings.MEDIA_ROOT, image.name)
         image_pillow = Image.open(image_full_path)
         original_width, original_height = image_pillow.size
@@ -100,13 +100,12 @@ class Recipe(models.Model):
             slug = f'{slugify(self.title)}'
             self.slug = slug
 
-        if self.cover:
-            try:
-                self.resize_image(self.cover, 800)
-            except FileNotFoundError:
-                ...
+        super().save(*args, **kwargs)  # noqa: E1128
 
-        return super().save(*args, **kwargs)
+        if self.cover:
+            self.resize_image(self.cover, 840)
+
+        return
 
     def clean(self, *args, **kwargs) -> None:
         error_messages = defaultdict(list)
