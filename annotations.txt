@@ -386,3 +386,20 @@ class Recipe(models.Model):
 
 o framework padrão do django contenttypes nos permite fazer relações genéricas entre apps, para que o app possa ser transportado para outro projeto ou até reutilizado em outro app de maneira genérica, sem dependencias.
 Criamos um app de tags que poderá ser transportado para qualquer lugar da aplicação (autores, receitas, categorias, ele não vai depender de nada da aplicação), ou até para outro projeto.
+
+
+Signals são como as TRIGGERS no banco de dados, mas com mais possibilidades.
+No arquivo signals.py define-se a função que será executada de acordo com o tipo de signal recebido (pre_save, post_save, etc).
+
+O tipo de signal e o model relacionado que emitirá o sinal para esse receiver. Basicamente conecta o model a um signal.
+    @receiver(post_save, sender=User)
+    def signal_receiver(sender, instance, created):
+
+Após, no arquivo apps.py deve-se sobreescrever uma função chamada ready() para carregar os signals quando o app for inicializado.
+    def ready(self, *args, **kwargs) -> None:
+        import authors.signals
+        return super().ready(*args, **kwargs)
+        
+
+No contexto de tradução o método gettext() sempre executa a tradução quando o modelo é carregado, geralmente utilizado nos templates. Mas as vezes você quer carregar o modelo para qualquer outra coisa sem precisar fazer essa tradução, então se usa o gettext_lazy(), que só traduz quando realmente é necessário.
+O comando makemessages vasculha no código onde é preciso fazer a tradução, e gera um arquivo para que você possa traduzir. O comando compilemessages, de fato executa essa tradução no aplicativo.
