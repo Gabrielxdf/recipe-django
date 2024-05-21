@@ -1,13 +1,16 @@
 # Application definition
 
 INSTALLED_APPS = [
+    # Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # our apps
+    # Django Rest Framework
+    'rest_framework',
+    # Our apps
     'recipes',
     'authors',
     'tag',
