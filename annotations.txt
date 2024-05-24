@@ -413,3 +413,5 @@ O decorator
         return Response('ok')
 
 Transforma a request e a response de uma view em uma request e response do rest framework, portanto não é mais uma request e response do django normal. Isso tem muitas funcionalidades.
+
+O serializer serve para que o model seja convertido em um formato JSON.
