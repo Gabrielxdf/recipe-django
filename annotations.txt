@@ -403,3 +403,13 @@ Após, no arquivo apps.py deve-se sobreescrever uma função chamada ready() par
 
 No contexto de tradução o método gettext() sempre executa a tradução quando o modelo é carregado, geralmente utilizado nos templates. Mas as vezes você quer carregar o modelo para qualquer outra coisa sem precisar fazer essa tradução, então se usa o gettext_lazy(), que só traduz quando realmente é necessário.
 O comando makemessages vasculha no código onde é preciso fazer a tradução, e gera um arquivo para que você possa traduzir. O comando compilemessages, de fato executa essa tradução no aplicativo.
+
+O decorator
+    # from django.http import HttpResponse não usa mais esse
+    from rest_framework.decorators import api_view
+    from rest_framework.response import Response
+    @api_view()
+    def recipe_api_list(request):
+        return Response('ok')
+
+Transforma a request e a response de uma view em uma request e response do rest framework, portanto não é mais uma request e response do django normal. Isso tem muitas funcionalidades.
