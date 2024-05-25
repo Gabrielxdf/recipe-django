@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
@@ -24,6 +23,7 @@ def recipe_api_detail(request, pk):
     return Response(serializer.data)
 
 # IF YOU WANT TO CHANGE THE DETAIL MESSAGE AND STATUS CODE #
+    # from rest_framework import status
     # recipe = Recipe.objects.get_published().filter(pk=pk).first()
 
     # if recipe:
