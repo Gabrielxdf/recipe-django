@@ -9,7 +9,7 @@
         "--load-plugins=pylint_django",
         "--errors-only",
         "--django-settings-module=project.settings",
-        "--disable=E5142"
+        "--disable=E5142, E1101"
         ],
       "flake8.args": ["--max-line-length=79"],
       "editor.rulers": [79],
