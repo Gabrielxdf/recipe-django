@@ -415,3 +415,7 @@ O decorator
 Transforma a request e a response de uma view em uma request e response do rest framework, portanto não é mais uma request e response do django normal. Isso tem muitas funcionalidades.
 
 O serializer serve para que o model seja convertido em um formato JSON.
+
+Estamos criando um backend, uma API que será uma porta de entrada para outros aplicativos se conectarem com o nosso. É uma interface de conexão entre aplicativos.
+
+Nas API, o HTTP method e os status code são muito importantes.
