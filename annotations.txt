@@ -419,3 +419,6 @@ O serializer serve para que o model seja convertido em um formato JSON.
 Estamos criando um backend, uma API que será uma porta de entrada para outros aplicativos se conectarem com o nosso. É uma interface de conexão entre aplicativos.
 
 Nas API, o HTTP method e os status code são muito importantes.
+
+O serializer do DRF é usado tanto para serializar quanto para deserializar os dados.
+Quando serializar ele pega nossos dados e transforma em JSON, quando deserializar ele pega os dados em JSON e transforma em dados pra nossa base de dados.
