@@ -422,3 +422,9 @@ Nas API, o HTTP method e os status code são muito importantes.
 
 O serializer do DRF é usado tanto para serializar quanto para deserializar os dados.
 Quando serializar ele pega nossos dados e transforma em JSON, quando deserializar ele pega os dados em JSON e transforma em dados pra nossa base de dados.
+
+serializer = RecipeSerializer(data=request.data)
+serializer.is_valid(raise_exception=True)
+serializer.save()  # calls the model's save method
+
+Se não for especificado os métodos validate_field ou validate, o DRF vai chamar os métodos de validação do Django.

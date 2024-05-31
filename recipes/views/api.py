@@ -21,7 +21,7 @@ def recipe_api_list(request):
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = RecipeSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)  # calls this model's method
+        serializer.is_valid(raise_exception=True)
         serializer.save()  # calls the model's save method
         return Response(
             serializer.validated_data,

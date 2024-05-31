@@ -48,3 +48,28 @@ class RecipeSerializer(serializers.ModelSerializer):
     def any_method_name(self, recipe):  # get_field_name or method_name param
 
         return f'{recipe.preparation_time} {recipe.preparation_time_unit}'
+
+    # analogous to django's clean method
+    def validate(self, attrs):
+        super_validate = super().validate(attrs)
+
+        title = attrs.get('title')
+        description = attrs.get('description')
+
+        if title == description:
+            raise serializers.ValidationError(
+                {
+                    "title": ["Posso", "ter", "mais de um erro"],
+                    "description": ["Posso", "ter", "mais de um erro"],
+                }
+            )
+        return super_validate
+    # analogous to django's clean_field method, this is called first
+
+    def validate_title(self, value):
+        title = value
+
+        if len(title) < 5:
+            raise serializers.ValidationError('Must have at least 5 chars.')
+
+        return title
