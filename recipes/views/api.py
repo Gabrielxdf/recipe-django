@@ -34,30 +34,33 @@ def recipe_api_list(request):
         )
 
 
-@api_view()
+@api_view(http_method_names=['get', 'patch', 'delete'])
 def recipe_api_detail(request, pk):
     recipe = get_object_or_404(
         Recipe.objects,
         pk=pk
     )
-    serializer = RecipeSerializer(
-        instance=recipe,
-        many=False,
-        context={'request': request},
-    )
-    return Response(serializer.data)
-
-# IF YOU WANT TO CHANGE THE DETAIL MESSAGE AND STATUS CODE #
-    # from rest_framework import status
-    # recipe = Recipe.objects.get_published().filter(pk=pk).first()
-
-    # if recipe:
-    #     serializer = RecipeSerializer(instance=recipe, many=False)
-    #     return Response(serializer.data)
-    # else:
-    #     return Response({
-    #         'detail': 'oops',
-    #     }, status=status.HTTP_418_IM_A_TEAPOT)
+    if request.method == 'GET':
+        serializer = RecipeSerializer(
+            instance=recipe,
+            many=False,
+            context={'request': request},
+        )
+        return Response(serializer.data)
+    elif request.method == 'PATCH':
+        serializer = RecipeSerializer(
+            instance=recipe,
+            data=request.data,
+            many=False,
+            partial=True,
+            context={'request': request},
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        recipe.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view()

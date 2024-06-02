@@ -55,6 +55,13 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     # analogous to django's clean method
     def validate(self, attrs):
+        # to avoid validation when partial updating
+        if self.instance is not None and attrs.get('servings') is None:
+            attrs['servings'] = self.instance.servings
+
+        if self.instance is not None and attrs.get('preparation_time') is None:
+            attrs['preparation_time'] = self.instance.preparation_time
+
         super_validate = super().validate(attrs)
         AuthorRecipeValidator(
             data=attrs,
