@@ -430,3 +430,5 @@ serializer.save()  # calls the model's save method
 Se não for especificado os métodos validate_field ou validate, o DRF vai chamar os métodos de validação do Django.
 
 Sobre os HTTP Methods: Get é para ler um recurso, POST parar criar um recurso, PUT é para atualizar um recurso por inteiro no servidor, excluindo esse recurso e criando um novo, PATCH é para atualizar o recurso em apenas partes específicas e DELETE é para deletar o recurso.
+
+A classe ViewSet serve para unir diferentes Class Based Views. O método as_view() dessa classe agora precisa do roteamento, isto é, qual método http vai ser roteado para qual método das classes que foram unidas.
