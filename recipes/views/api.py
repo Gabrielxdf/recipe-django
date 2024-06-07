@@ -20,7 +20,7 @@ class RecipeAPIv2ViewSet(ModelViewSet):
     pagination_class = RecipeAPIv2Pagination
 
     # we can overwrite methods
-    def patch(self, request, *args, **kwargs):
+    def partial_update(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
 
         recipe = self.get_queryset().filter(pk=pk).first()
