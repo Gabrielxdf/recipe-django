@@ -404,6 +404,8 @@ Após, no arquivo apps.py deve-se sobreescrever uma função chamada ready() par
 No contexto de tradução o método gettext() sempre executa a tradução quando o modelo é carregado, geralmente utilizado nos templates. Mas as vezes você quer carregar o modelo para qualquer outra coisa sem precisar fazer essa tradução, então se usa o gettext_lazy(), que só traduz quando realmente é necessário.
 O comando makemessages vasculha no código onde é preciso fazer a tradução, e gera um arquivo para que você possa traduzir. O comando compilemessages, de fato executa essa tradução no aplicativo.
 
+***DRF***
+
 O decorator
     # from django.http import HttpResponse não usa mais esse
     from rest_framework.decorators import api_view
@@ -432,3 +434,5 @@ Se não for especificado os métodos validate_field ou validate, o DRF vai chama
 Sobre os HTTP Methods: Get é para ler um recurso, POST parar criar um recurso, PUT é para atualizar um recurso por inteiro no servidor, excluindo esse recurso e criando um novo, PATCH é para atualizar o recurso em apenas partes específicas e DELETE é para deletar o recurso.
 
 A classe ViewSet serve para unir diferentes Class Based Views. O método as_view() dessa classe agora precisa do roteamento, isto é, qual método http vai ser roteado para qual método das classes que foram unidas.
+
+Os routers servem para gerarem um roteamento de maneira automática.
