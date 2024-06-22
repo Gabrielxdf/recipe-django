@@ -436,3 +436,13 @@ Sobre os HTTP Methods: Get é para ler um recurso, POST parar criar um recurso, 
 A classe ViewSet serve para unir diferentes Class Based Views. O método as_view() dessa classe agora precisa do roteamento, isto é, qual método http vai ser roteado para qual método das classes que foram unidas.
 
 Os routers servem para gerarem um roteamento de maneira automática.
+
+
+Quanto aos testes no DRF e no Django, nunca devemos ficar dependendo de coisas externas, como por exemplo o page_size da paginação, pois toda vez que esse page_size for mudado, todas os testes que dependem desse elemento externo irão quebrar. Isso se resolve com patch no teste, garantindo que o teste sempre tenha um valor fixo para essa variável. Por exemplo:
+
+from unittest.mock import patch
+@patch('recipes.views.api.RecipeAPIv2Pagination.page_size', new=7) # definindo o valor da page_size para esse teste como 7
+def test_recipe_api_list_loads_correct_number_of_recipes(self):
+
+Arrange act assert (AAA)
+Ajuste, ação e asserção - É um padrão para a escrita de bons testes
