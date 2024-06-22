@@ -28,3 +28,29 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
             wanted_number_of_recipes,
             qty_of_loaded_recipes
         )
+
+    @patch('recipes.views.api.RecipeAPIv2Pagination.page_size', new=3)
+    def test_recipe_api_list_is_paginated(self):
+        # arrange
+        total_number_of_recipes = 5
+        recipes_in_page_1 = 3
+        recipes_in_page_2 = 2
+        self.make_recipe_in_batch(qty=total_number_of_recipes)
+        # act
+        response_page_1 = self.client.get(
+            reverse('recipes:recipes-api-list') + '?page=1'
+        )
+        response_page_2 = self.client.get(
+            reverse('recipes:recipes-api-list') + '?page=2'
+        )
+        qty_of_loaded_recipes_page_1 = len(response_page_1.data.get('results'))
+        qty_of_loaded_recipes_page_2 = len(response_page_2.data.get('results'))
+        # assert
+        self.assertEqual(
+            recipes_in_page_1,
+            qty_of_loaded_recipes_page_1
+        )
+        self.assertEqual(
+            recipes_in_page_2,
+            qty_of_loaded_recipes_page_2
+        )
