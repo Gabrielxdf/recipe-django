@@ -7,9 +7,13 @@ from recipes.tests.test_recipe_base import RecipeMixin
 
 
 class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
-    def test_recipe_api_list_returns_status_code_200(self):
-        api_url = reverse('recipes:recipes-api-list')
+    def get_recipe_api_list(self, query_string=''):
+        api_url = reverse('recipes:recipes-api-list') + query_string
         response = self.client.get(api_url)
+        return response
+
+    def test_recipe_api_list_returns_status_code_200(self):
+        response = self.get_recipe_api_list()
         self.assertEqual(
             response.status_code,
             200
@@ -21,7 +25,7 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         wanted_number_of_recipes = 5
         self.make_recipe_in_batch(qty=wanted_number_of_recipes)
         # act
-        response = self.client.get(reverse('recipes:recipes-api-list'))
+        response = self.get_recipe_api_list()
         qty_of_loaded_recipes = len(response.data.get('results'))
         # assert
         self.assertEqual(
@@ -37,12 +41,8 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         recipes_in_page_2 = 2
         self.make_recipe_in_batch(qty=total_number_of_recipes)
         # act
-        response_page_1 = self.client.get(
-            reverse('recipes:recipes-api-list') + '?page=1'
-        )
-        response_page_2 = self.client.get(
-            reverse('recipes:recipes-api-list') + '?page=2'
-        )
+        response_page_1 = self.get_recipe_api_list('?page=1')
+        response_page_2 = self.get_recipe_api_list('?page=2')
         qty_of_loaded_recipes_page_1 = len(response_page_1.data.get('results'))
         qty_of_loaded_recipes_page_2 = len(response_page_2.data.get('results'))
         # assert
@@ -53,4 +53,15 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         self.assertEqual(
             recipes_in_page_2,
             qty_of_loaded_recipes_page_2
+        )
+
+    def test_recipe_api_list_do_not_show_not_published_recipes(self):
+        recipes = self.make_recipe_in_batch(qty=2)
+        recipe_not_published = recipes[0]
+        recipe_not_published.is_published = True
+        recipe_not_published.save()
+        response = self.get_recipe_api_list()
+        self.assertEqual(
+            len(response.data.get('results')),
+            1
         )
