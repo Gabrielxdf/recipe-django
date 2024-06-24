@@ -58,7 +58,7 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
     def test_recipe_api_list_do_not_show_not_published_recipes(self):
         recipes = self.make_recipe_in_batch(qty=2)
         recipe_not_published = recipes[0]
-        recipe_not_published.is_published = True
+        recipe_not_published.is_published = False
         recipe_not_published.save()
         response = self.get_recipe_api_list()
         self.assertEqual(
