@@ -7,8 +7,9 @@ from recipes.tests.test_recipe_base import RecipeMixin
 
 
 class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
-    def get_recipe_api_list(self, query_string=''):
-        api_url = reverse('recipes:recipes-api-list') + query_string
+    def get_recipe_api_list(self, query_string='', reverse_result=None):
+        api_url = reverse_result or reverse(
+            'recipes:recipes-api-list') + query_string
         response = self.client.get(api_url)
         return response
 
@@ -64,4 +65,33 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         self.assertEqual(
             len(response.data.get('results')),
             1
+        )
+
+    @patch('recipes.views.api.RecipeAPIv2Pagination.page_size', new=10)
+    def test_recipe_api_list_loads_recipes_by_category_id(self):
+        # Create categories
+        category_wanted = self.make_category(name='WANTED_CATEGORY')
+        category_not_wanted = self.make_category(name='NOT_WANTED_CATEGORY')
+
+        # Create 10 recipes
+        recipes = self.make_recipe_in_batch(qty=10)
+
+        # Change all the recipes to the wanted category
+        for recipe in recipes:
+            recipe.category = category_wanted
+            recipe.save()
+
+        # Change 1 recipe to the NOT wanted category
+        # As a result, this recipe should be shown in the page.
+        recipes[0].category = category_not_wanted
+        recipes[0].save()
+
+        # Action: get recipes by wanted category_id
+        query_string = f'?category_id={category_wanted.id}'
+        response = self.get_recipe_api_list(query_string=query_string)
+
+        # We should only see recipes from the wanted category
+        self.assertEqual(
+            len(response.data.get('results')),
+            9  # 10 - 1 = 9
         )
