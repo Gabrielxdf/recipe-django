@@ -7,9 +7,13 @@ from recipes.tests.test_recipe_base import RecipeMixin
 
 
 class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
-    def get_recipe_api_list(self, query_string='', reverse_result=None):
+    def get_recipe_reverse_url(self, reverse_result=None, query_string=''):
         api_url = reverse_result or reverse(
             'recipes:recipes-api-list') + query_string
+        return api_url
+
+    def get_recipe_api_list(self, reverse_result=None, query_string=''):
+        api_url = self.get_recipe_reverse_url(reverse_result, query_string)
         response = self.client.get(api_url)
         return response
 
@@ -42,8 +46,8 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         recipes_in_page_2 = 2
         self.make_recipe_in_batch(qty=total_number_of_recipes)
         # act
-        response_page_1 = self.get_recipe_api_list('?page=1')
-        response_page_2 = self.get_recipe_api_list('?page=2')
+        response_page_1 = self.get_recipe_api_list(query_string='?page=1')
+        response_page_2 = self.get_recipe_api_list(query_string='?page=2')
         qty_of_loaded_recipes_page_1 = len(response_page_1.data.get('results'))
         qty_of_loaded_recipes_page_2 = len(response_page_2.data.get('results'))
         # assert
@@ -94,4 +98,12 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         self.assertEqual(
             len(response.data.get('results')),
             9  # 10 - 1 = 9
+        )
+
+    def test_recipe_api_list_user_must_send_jwt_token_to_create_recipe(self):
+        api_url = self.get_recipe_reverse_url()
+        response = self.client.post(api_url)
+        self.assertEqual(
+            response.status_code,
+            401
         )
