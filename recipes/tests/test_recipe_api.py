@@ -1,22 +1,11 @@
 from unittest.mock import patch
 
-from django.urls import reverse
 from rest_framework import test
 
-from recipes.tests.test_recipe_base import RecipeMixin
+from recipes.tests.test_recipe_base import RecipeAPIMixin
 
 
-class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
-    def get_recipe_reverse_url(self, reverse_result=None, query_string=''):
-        api_url = reverse_result or reverse(
-            'recipes:recipes-api-list') + query_string
-        return api_url
-
-    def get_recipe_api_list(self, reverse_result=None, query_string=''):
-        api_url = self.get_recipe_reverse_url(reverse_result, query_string)
-        response = self.client.get(api_url)
-        return response
-
+class RecipeAPIv2Test(test.APITestCase, RecipeAPIMixin):
     def test_recipe_api_list_returns_status_code_200(self):
         response = self.get_recipe_api_list()
         self.assertEqual(
@@ -107,3 +96,6 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
             response.status_code,
             401
         )
+
+    def test_jwt_login(self):
+        print(self.get_jwt_access_token())

@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from recipes.models import Category, Recipe, User
 
@@ -79,3 +80,29 @@ class RecipeTestBase(TestCase, RecipeMixin):
     def tearDown(self) -> None:
         # This method is executed after any test
         return super().tearDown()
+
+
+class RecipeAPIMixin(RecipeMixin):
+    def get_recipe_reverse_url(self, reverse_result=None, query_string=''):
+        api_url = reverse_result or reverse(
+            'recipes:recipes-api-list') + query_string
+        return api_url
+
+    def get_recipe_api_list(self, reverse_result=None, query_string=''):
+        api_url = self.get_recipe_reverse_url(reverse_result, query_string)
+        response = self.client.get(api_url)
+        return response
+
+    def get_jwt_access_token(self):
+        user_data = {
+            'username': 'user',
+            'password': 'password',
+        }
+
+        self.make_author(**user_data)
+
+        response = self.client.post(
+            reverse('recipes:token_obtain_pair'),
+            data={**user_data}
+        )
+        return response.data.get('access')
