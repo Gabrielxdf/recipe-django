@@ -106,3 +106,14 @@ class RecipeAPIMixin(RecipeMixin):
             data={**user_data}
         )
         return response.data.get('access')
+    
+    def get_recipe_raw_data(self):
+        return {
+            'title': 'this is the title',
+            'description': 'this is the description',
+            'preparation_time': 1,
+            'preparation_time_unit': 'minutes',
+            'servings': 1,
+            'servings_unit': 'person',
+            'preparation_steps': 'this is the preparation steps',
+        }
