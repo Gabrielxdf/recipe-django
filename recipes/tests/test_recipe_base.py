@@ -83,9 +83,9 @@ class RecipeTestBase(TestCase, RecipeMixin):
 
 
 class RecipeAPIv2Mixin(RecipeMixin):
-    def get_recipe_list_reverse_url(self, reverse_result=None, query_string=''):
+    def get_recipe_list_reverse_url(self, reverse_result=None, query_str=''):
         api_url = reverse_result or reverse(
-            'recipes:recipes-api-list') + query_string
+            'recipes:recipes-api-list') + query_str
         return api_url
 
     def get_recipe_api_list(self, reverse_result=None, query_string=''):

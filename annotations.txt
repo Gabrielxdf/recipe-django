@@ -446,3 +446,7 @@ def test_recipe_api_list_loads_correct_number_of_recipes(self):
 
 Arrange act assert (AAA)
 Ajuste, ação e asserção - É um padrão para a escrita de bons testes
+
+CORS - O navegador não permite que origens difentes façam requisições para a sua API. Até mesmo portas diferentes o navegador considera como uma origem diferente. Por exemplo o domínio 127.0.0.1:8000 (o domínio da API), para o navegador, é diferente de 127.0.0.1:5500 (o domínio do live server, front-end), portanto o navegador bloqueia as requisições.
+
+Para solucionar isso ou você desativa o CORS (que não é recomendado), ou liberar os sites que queremos permitir que se conectem a nossa API.

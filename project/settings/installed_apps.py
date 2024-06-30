@@ -11,6 +11,8 @@ INSTALLED_APPS = [
     # Django Rest Framework
     'rest_framework',
     'rest_framework_simplejwt',
+    # CORS Headers
+    'corsheaders',
     # Our apps
     'recipes',
     'authors',
