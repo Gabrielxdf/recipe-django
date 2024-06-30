@@ -82,31 +82,36 @@ class RecipeTestBase(TestCase, RecipeMixin):
         return super().tearDown()
 
 
-class RecipeAPIMixin(RecipeMixin):
-    def get_recipe_reverse_url(self, reverse_result=None, query_string=''):
+class RecipeAPIv2Mixin(RecipeMixin):
+    def get_recipe_list_reverse_url(self, reverse_result=None, query_string=''):
         api_url = reverse_result or reverse(
             'recipes:recipes-api-list') + query_string
         return api_url
 
     def get_recipe_api_list(self, reverse_result=None, query_string=''):
-        api_url = self.get_recipe_reverse_url(reverse_result, query_string)
+        api_url = self.get_recipe_list_reverse_url(
+            reverse_result, query_string)
         response = self.client.get(api_url)
         return response
 
-    def get_jwt_access_token(self):
+    def get_auth_data(self, username='user', password='pass'):
         user_data = {
-            'username': 'user',
-            'password': 'password',
+            'username': username,
+            'password': password,
         }
 
-        self.make_author(**user_data)
+        user = self.make_author(**user_data)
 
         response = self.client.post(
             reverse('recipes:token_obtain_pair'),
             data={**user_data}
         )
-        return response.data.get('access')
-    
+        return {
+            'jwt_access_token': response.data.get('access'),
+            'jwt_refresh_token': response.data.get('refresh'),
+            'user': user,
+        }
+
     def get_recipe_raw_data(self):
         return {
             'title': 'this is the title',
