@@ -4,7 +4,7 @@
 *.pyc
 __pycache__
 #db.sqlite3
-media
+#media
 
 # Backup files #
 *.bak
@@ -125,7 +125,7 @@ env
 local_settings.py
 _local_settings.py
 gunicorn-error-log
-db.sqlite3
+#db.sqlite3
 db copy.sqlite3
 static/
 annotations.txt
